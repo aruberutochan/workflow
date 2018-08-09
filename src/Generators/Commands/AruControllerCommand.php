@@ -5,6 +5,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Aruberuto\Workflow\Generators\ControllerGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

@@ -4,6 +4,7 @@ namespace Aruberuto\Workflow\Generators\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -111,7 +112,6 @@ class AruEntityCommand extends Command
             'name'        => $this->argument('name'),
             '--fillable'  => $this->option('fillable'),
             '--rules'     => $this->option('rules'),
-            '--validator' => $validator,
             '--force'     => $this->option('force')
         ]);
 
