@@ -1,0 +1,25 @@
+{
+    "name": "aruberuto/workflow",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "aruberutoChan",
+        "email": "albertoguerrerogarcia@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aruberuto\\Workflow\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aruberuto\\Workflow\\WorkflowServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "prettus/l5-repository": "dev-master"
+    }
+}
