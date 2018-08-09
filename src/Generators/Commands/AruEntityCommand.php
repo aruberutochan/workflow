@@ -7,7 +7,7 @@ use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use File;
+
 /**
  * Class EntityCommand
  * @package Prettus\Repository\Generators\Commands
@@ -131,8 +131,16 @@ class AruEntityCommand extends Command
                 'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
             ]);
             $path = app()->path() . '/Providers/' .  $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()) . '.php';
-            $provider = File::get($path);
-            File::put($path, vsprintf(str_replace('//', '%s', $provider), [
+            $provider = \File::get($path);
+            
+            // TODO
+            // // Add entity repository binding to the repository service provider
+            // $provider = \File::get($path);
+            // $repositoryInterface = '\\' . $this->getRepository() . "::class";
+            // $repositoryEloquent = '\\' . $this->getEloquentRepository() . "::class";
+            // \File::put($this->getPath(), str_replace($this->bindPlaceholder, "\$this->app->bind({$repositoryInterface}, $repositoryEloquent);" . PHP_EOL . '        ' . $this->bindPlaceholder, $provider));
+
+            \File::put($path, vsprintf(str_replace('//', '%s', $provider), [
                 '//',
                 $bindingGenerator->bindPlaceholder
             ]));
