@@ -7,7 +7,7 @@ use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-
+use File;
 /**
  * Class EntityCommand
  * @package Prettus\Repository\Generators\Commands
@@ -112,13 +112,32 @@ class AruEntityCommand extends Command
             'name'        => $this->argument('name'),
             '--fillable'  => $this->option('fillable'),
             '--rules'     => $this->option('rules'),
-            '--force'     => $this->option('force')
+            '--force'     => true
         ]);
+        config('repository.generator.basePath', app()->path());
+        if (config('repository.generator.basePath', app()->path()) == app()->path()) {
+            $this->call('make:bindings', [
+                'name'    => $this->argument('name'),
+                '--force' => true
+            ]);
+            
+        } else {
+            // Workaround to solve this issue https://github.com/andersao/l5-repository/issues/522
+            $bindingGenerator = new \Prettus\Repository\Generators\BindingsGenerator([
+                'name' => $this->argument('name'),
+                'force' => $this->option('force'),
+            ]);
+            $this->call('make:provider', [
+                'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
+            ]);
+            $path = app()->path() . '/Providers/' .  $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()) . '.php';
+            $provider = File::get($path);
+            File::put($path, vsprintf(str_replace('//', '%s', $provider), [
+                '//',
+                $bindingGenerator->bindPlaceholder
+            ]));
+        }
 
-        $this->call('make:bindings', [
-            'name'    => $this->argument('name'),
-            '--force' => $this->option('force')
-        ]);
     }
 
 
