@@ -9,7 +9,7 @@ use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
  * Class ControllerGenerator
  * @package Aruberuto\Workflow\Generators
  */
-class ControllerGenerator extends Generator
+class AruRequestGenerator extends Generator
 {
 
     /**
@@ -17,16 +17,17 @@ class ControllerGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'controller/controller';
+    protected $stub = 'request/request';
 
     /**
      * Get root namespace.
      *
      * @return string
      */
+
     public function getRootNamespace()
     {
-        return str_replace('/', '\\', parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode()));
+        return str_replace('/', '\\', parent::getRootNamespace() . self::getConfigGeneratorClassPath($this->getPathConfigNode()));
     }
 
     /**
@@ -36,7 +37,7 @@ class ControllerGenerator extends Generator
      */
     public function getPathConfigNode()
     {
-        return 'controllers';
+        return 'request';
     }
 
     /**
@@ -61,7 +62,9 @@ class ControllerGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getControllerName() . 'Controller.php';
+        $path = $this->getBasePath() . '/' . self::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getRequestName() . 'Request.php';
+
+        return $path;
     }
 
     /**
@@ -79,21 +82,10 @@ class ControllerGenerator extends Generator
      *
      * @return string
      */
-    public function getControllerName()
+    public function getRequestName()
     {
 
         return ucfirst(lcfirst(ucwords($this->getClass())));
-    }
-
-    /**
-     * Gets controller name based on model
-     *
-     * @return string
-     */
-    public function getServiceName()
-    {
-
-        return ucfirst(lcfirst(ucwords($this->getClass()))) . 'Service';
     }
 
     /**
@@ -114,16 +106,14 @@ class ControllerGenerator extends Generator
      */
     public function getReplacements()
     {
-        // dd(parent::getRootNamespace());
 
         return array_merge(parent::getReplacements(), [
-            'controller' => $this->getControllerName(),
-            'service'    => $this->getServiceName(),
+            'request'    => $this->getRequestName(),
             'plural'     => $this->getPluralName(),
             'singular'   => $this->getSingularName(),
             'validator'  => $this->getValidator(),
             'repository' => $this->getRepository(),
-            'appname'    => parent::getRootNamespace(),
+            'appname'    => $this->getAppNamespace(),
         ]);
     }
 
@@ -185,15 +175,18 @@ class ControllerGenerator extends Generator
      */
     public function getConfigGeneratorClassPath($class, $directoryPath = false)
     {
-        if($class == 'controllers') {
-            $path = config('repository.generator.paths.controllers', 'Controller');
+        if($class == 'request') {
+            $path = config('repository.generator.paths.request', 'Http/Request');
             if ($directoryPath) {
                 $path = str_replace('\\', '/', $path);
             } else {
                 $path = str_replace('/', '\\', $path);
             }
+
             return $path;
         } else {
+
+
             return parent::getConfigGeneratorClassPath($class, $directoryPath = false);
         }
     }

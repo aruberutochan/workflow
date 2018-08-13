@@ -40,6 +40,7 @@ class WorkflowServiceProvider extends ServiceProvider
         $this->commands('Aruberuto\Workflow\Generators\Commands\ServiceCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\AruControllerCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\AruEntityCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\AruRequestCommand');
     }
 
 
