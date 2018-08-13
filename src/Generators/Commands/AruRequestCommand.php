@@ -3,13 +3,13 @@ namespace Aruberuto\Workflow\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Aruberuto\Workflow\Generators\ControllerGenerator;
+use Aruberuto\Workflow\Generators\AruRequestGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class AruControllerCommand extends Command
+class AruRequestCommand extends Command
 {
 
     /**
@@ -17,28 +17,28 @@ class AruControllerCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:arucontroller';
+    protected $name = 'make:aru-request';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Create a new Controller with Service layer.';
+    protected $description = 'Create a new Request.';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Controller';
+    protected $type = 'Request';
 
     /**
      * ControllerCommand constructor.
      */
     public function __construct()
     {
-        $this->name = 'make:arucontroller';
+        $this->name = 'make:aru-request';
         parent::__construct();
     }
 
@@ -60,17 +60,7 @@ class AruControllerCommand extends Command
     public function fire()
     {
         try {
-            // Generate create request for controller
-            $this->call('make:aru-request', [
-                'name' => $this->argument('name') . 'Create'
-            ]);
-
-            // Generate update request for controller
-            $this->call('make:aru-request', [
-                'name' => $this->argument('name') . 'Update'
-            ]);
-
-            (new ControllerGenerator([
+            (new AruRequestGenerator([
                 'name' => $this->argument('name'),
                 'force' => $this->option('force'),
             ]))->run();
@@ -78,7 +68,6 @@ class AruControllerCommand extends Command
             $this->info($this->type . ' created successfully.');
 
         } catch (FileAlreadyExistsException $e) {
-
             $this->error($this->type . ' already exists!');
 
             return false;
@@ -97,7 +86,7 @@ class AruControllerCommand extends Command
             [
                 'name',
                 InputArgument::REQUIRED,
-                'The name of model for which the Service is being generated.',
+                'The name of entity for which the Request is being generated.',
                 null
             ],
         ];

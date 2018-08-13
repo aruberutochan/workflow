@@ -3,8 +3,6 @@
 $NAMESPACE$
 
 use Illuminate\Http\Request;
-
-use $APPNAME$Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use $APPNAME$Http\Requests\$CLASS$CreateRequest;
 use $APPNAME$Http\Requests\$CLASS$UpdateRequest;
@@ -48,7 +46,7 @@ class $SERVICE$Service extends AruAbstractService
     public function getAll()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        
+
         return $this->repository->all();
 
     }
