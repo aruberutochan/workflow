@@ -1,6 +1,6 @@
 <?php
 namespace Aruberuto\Workflow\Generators;
-use Prettus\Repository\Generators\Generator;
+use Aruberuto\Workflow\Generators\Generator;
 use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
@@ -20,38 +20,13 @@ class ControllerGenerator extends Generator
     protected $stub = 'controller/controller';
 
     /**
-     * Get root namespace.
-     *
-     * @return string
-     */
-    public function getRootNamespace()
-    {
-        return str_replace('/', '\\', parent::getRootNamespace() . parent::getConfigGeneratorClassPath($this->getPathConfigNode()));
-    }
-
-    /**
      * Get generator path config node.
      *
      * @return string
      */
     public function getPathConfigNode()
     {
-        return 'controllers';
-    }
-
-    /**
-     * Get stub template for generated file.
-     *
-     * @return string
-     */
-    public function getStub()
-    {
-        $path = config('repository.generator.stubsOverridePath', __DIR__);
-
-        if(!file_exists($path . '/Stubs/' . $this->stub . '.stub')){
-            $path = __DIR__;
-        }
-        return (new Stub($path . '/Stubs/' . $this->stub . '.stub', $this->getReplacements()))->render();
+        return 'controller';
     }
 
     /**
@@ -61,17 +36,7 @@ class ControllerGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . parent::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getControllerName() . 'Controller.php';
-    }
-
-    /**
-     * Get base path of destination file.
-     *
-     * @return string
-     */
-    public function getBasePath()
-    {
-        return config('repository.generator.basePath', app()->path());
+        return $this->getBasePath() . '/' . self::getConfigGeneratorClassPath($this->getPathConfigNode(), true) . '/' . $this->getControllerName() . 'Controller.php';
     }
 
     /**
@@ -81,8 +46,7 @@ class ControllerGenerator extends Generator
      */
     public function getControllerName()
     {
-
-        return ucfirst(lcfirst(ucwords($this->getClass())));
+        return ucwords($this->getClass());
     }
 
     /**
@@ -92,8 +56,7 @@ class ControllerGenerator extends Generator
      */
     public function getServiceName()
     {
-
-        return ucfirst(lcfirst(ucwords($this->getClass()))) . 'Service';
+        return ucwords($this->getClass()) . 'Service';
     }
 
     /**
@@ -103,7 +66,6 @@ class ControllerGenerator extends Generator
      */
     public function getPluralName()
     {
-
         return str_plural(lcfirst(ucwords($this->getClass())));
     }
 
@@ -114,7 +76,6 @@ class ControllerGenerator extends Generator
      */
     public function getReplacements()
     {
-        // dd(parent::getRootNamespace());
 
         return array_merge(parent::getReplacements(), [
             'controller' => $this->getControllerName(),
@@ -150,10 +111,7 @@ class ControllerGenerator extends Generator
 
         $validator = $validatorGenerator->getRootNamespace() . '\\' . $validatorGenerator->getName();
 
-        return 'use ' . str_replace([
-            "\\",
-            '/'
-        ], '\\', $validator) . 'Validator;';
+        return 'use ' . str_replace(["\\", '/'], '\\', $validator) . 'Validator;';
     }
 
 
@@ -186,7 +144,7 @@ class ControllerGenerator extends Generator
     public function getConfigGeneratorClassPath($class, $directoryPath = false)
     {
         if($class == 'controllers') {
-            $path = config('repository.generator.paths.controllers', 'Controller');
+            $path = config('workflow.controllerPath', 'Controller');
             if ($directoryPath) {
                 $path = str_replace('\\', '/', $path);
             } else {
