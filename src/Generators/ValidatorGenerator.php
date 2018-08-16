@@ -2,14 +2,13 @@
 namespace Aruberuto\Workflow\Generators;
 use Aruberuto\Workflow\Generators\Generator;
 use Prettus\Repository\Generators\Stub;
-use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
 
 /**
- * Class ServiceGenerator
+ * Class ValidatorGenerator
  * @package Aruberuto\Workflow\Generators
  */
-class ServiceGenerator extends Generator
+class ValidatorGenerator extends Generator
 {
     public function __construct(array $options = []) {
         parent::__construct($options);
@@ -38,7 +37,7 @@ class ServiceGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'service/service';
+    protected $stub = 'validator/validator';
 
     /**
      * Get Class type.
@@ -47,7 +46,23 @@ class ServiceGenerator extends Generator
      */
     public function getClassType()
     {
-        return 'service';
+        return 'validator';
+    }
+
+        /**
+     * Get array replacements.
+     *
+     * @return array
+     */
+    public function getReplacements()
+    {
+        return array_merge(parent::getReplacements(), [
+            'rules' => $this->getRules()
+        ]);
+    }
+
+    public function getRules() {
+        return '[]';
     }
 
 }

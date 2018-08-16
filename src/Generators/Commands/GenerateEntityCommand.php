@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @package Prettus\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
-class AruEntityCommand extends Command
+class GenerateEntityCommand extends Command
 {
 
     /**
@@ -21,7 +21,7 @@ class AruEntityCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:aru-entity';
+    protected $name = 'generate:entity';
 
     /**
      * The description of command.
@@ -120,7 +120,7 @@ class AruEntityCommand extends Command
                 'name'    => $this->argument('name'),
                 '--force' => true
             ]);
-            
+
         } else {
             // Workaround to solve this issue https://github.com/andersao/l5-repository/issues/522
             $bindingGenerator = new \Prettus\Repository\Generators\BindingsGenerator([
@@ -132,7 +132,7 @@ class AruEntityCommand extends Command
             ]);
             $path = app()->path() . '/Providers/' .  $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()) . '.php';
             $provider = \File::get($path);
-            
+
             // TODO
             // // Add entity repository binding to the repository service provider
             // $provider = \File::get($path);

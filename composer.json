@@ -20,7 +20,8 @@
         }
     },
     "require": {
-        "prettus/l5-repository": "^2.6.25"
+        "prettus/l5-repository": "^2.6.25",
+        "league/fractal": "^0.13.0@dev"
     },
     "require-dev": {
     }
