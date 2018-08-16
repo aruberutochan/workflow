@@ -1,38 +1,38 @@
 <?php
 
-$NAMESPACE$
+namespace $NAMESPACE$;
 
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use $APPNAME$Http\Requests\$CLASS$CreateRequest;
-use $APPNAME$Http\Requests\$CLASS$UpdateRequest;
-$REPOSITORY$
-$VALIDATOR$
+use $APPNAME$\Http\Requests\$NAME$CreateRequest;
+use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
+use $APPNAME$\Repositories\$REPOSITORY$;
+use $APPNAME$\Validators\$VALIDATOR$;
 
 /**
- * Class $SERVICE$Service.
+ * Class $SERVICE$.
  *
  * @package $NAMESPACE$
  */
-class $SERVICE$Service extends AruAbstractService
+class $SERVICE$ extends AruAbstractService
 {
     /**
-     * @var $CLASS$Repository
+     * @var $NAME$Repository
      */
     protected $repository;
 
     /**
-     * @var $CLASS$Validator
+     * @var $NAME$Validator
      */
     protected $validator;
 
     /**
      * $SERVICE$Service constructor.
      *
-     * @param $CLASS$Repository $repository
-     * @param $CLASS$Validator $validator
+     * @param $NAME$Repository $repository
+     * @param $NAME$Validator $validator
      */
-    public function __construct($CLASS$Repository $repository, $CLASS$Validator $validator)
+    public function __construct($NAME$Repository $repository, $NAME$Validator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -51,7 +51,7 @@ class $SERVICE$Service extends AruAbstractService
 
     }
 
-    public function create($CLASS$CreateRequest $request)
+    public function create($NAME$CreateRequest $request)
     {
         try {
 
@@ -77,7 +77,7 @@ class $SERVICE$Service extends AruAbstractService
 
     }
 
-    public function update($CLASS$UpdateRequest $request, $id)
+    public function update($NAME$UpdateRequest $request, $id)
     {
         try {
 

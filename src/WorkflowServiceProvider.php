@@ -21,10 +21,10 @@ class WorkflowServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/resources/config/repository.php' => config_path('repository.php')
+            __DIR__ . '/resources/config/workflow.php' => config_path('workflow.php')
         ]);
 
-        $this->mergeConfigFrom(   __DIR__ . '/resources/config/repository.php' , 'repository');
+        $this->mergeConfigFrom(   __DIR__ . '/resources/config/workflow.php' , 'workflow');
 
         $this->loadTranslationsFrom(   __DIR__ . '/resources/lang' , 'workflow');
     }
@@ -37,11 +37,22 @@ class WorkflowServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands('Aruberuto\Workflow\Generators\Commands\ServiceCommand');
-        $this->commands('Aruberuto\Workflow\Generators\Commands\AruControllerCommand');
-        $this->commands('Aruberuto\Workflow\Generators\Commands\AruEntityCommand');
-        $this->commands('Aruberuto\Workflow\Generators\Commands\AruRequestCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateControllerCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateCriteriaCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateEntityCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateModelCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GeneratePresenterCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateRequestCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateServiceCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateTransformerCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateValidatorCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateWorkflowEntityCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateMigrationCommand');
+
+
     }
+
+
 
 
     /**

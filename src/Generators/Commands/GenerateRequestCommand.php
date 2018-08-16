@@ -3,13 +3,13 @@ namespace Aruberuto\Workflow\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Aruberuto\Workflow\Generators\ControllerGenerator;
+use Aruberuto\Workflow\Generators\RequestGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class AruControllerCommand extends Command
+class GenerateRequestCommand extends Command
 {
 
     /**
@@ -17,28 +17,28 @@ class AruControllerCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:arucontroller';
+    protected $name = 'wf:generate:request';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Create a new Controller with Service layer.';
+    protected $description = 'Create a new Request with Service layer.';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Controller';
+    protected $type = 'Request';
 
     /**
-     * ControllerCommand constructor.
+     * RequestCommand constructor.
      */
     public function __construct()
     {
-        $this->name = 'make:arucontroller';
+        $this->name = 'wf:generate:request';
         parent::__construct();
     }
 
@@ -60,20 +60,19 @@ class AruControllerCommand extends Command
     public function fire()
     {
         try {
-            // Generate create request for controller
-            $this->call('make:aru-request', [
-                'name' => $this->argument('name') . 'Create'
-            ]);
+            // // Generate create request for request
+            // $this->call('generate:request', [
+            //     'name' => $this->argument('name') . 'Create',
+            //     'path' => $this->option('path') . '/Requests'
+            // ]);
 
-            // Generate update request for controller
-            $this->call('make:aru-request', [
-                'name' => $this->argument('name') . 'Update'
-            ]);
+            // // Generate update request for request
+            // $this->call('make:aru-request', [
+            //     'name' => $this->argument('name') . 'Update',
+            //     'path' => $this->option('path') . '/Requests'
+            // ]);
 
-            (new ControllerGenerator([
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
-            ]))->run();
+            (new RequestGenerator(array_merge($this->arguments(), $this->options() )))->run();
 
             $this->info($this->type . ' created successfully.');
 
@@ -119,6 +118,23 @@ class AruControllerCommand extends Command
                 'Force the creation if file already exists.',
                 null
             ],
+            [
+                'path',
+                'p',
+                InputOption::VALUE_REQUIRED,
+                'The http base path where the request will be generated.',
+                config('workflow.http', '/Http'),
+
+            ],
+            [
+                'root-namespace',
+                'r',
+                InputOption::VALUE_REQUIRED,
+                'The base namespace of the generated files',
+                config('workflow.rootNamespace', 'App\\'),
+
+            ],
+
         ];
     }
 }

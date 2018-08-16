@@ -1,15 +1,17 @@
 <?php
 namespace Aruberuto\Workflow\Generators;
+use Aruberuto\Workflow\Generators\MigrationGenerator;
 use Aruberuto\Workflow\Generators\Generator;
 use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
+use Illuminate\Support\Str;
 
 /**
- * Class ServiceGenerator
+ * Class MetadataMigrationGenerator
  * @package Aruberuto\Workflow\Generators
  */
-class ServiceGenerator extends Generator
+class MetadataMigrationGenerator extends MigrationGenerator
 {
     public function __construct(array $options = []) {
         parent::__construct($options);
@@ -38,16 +40,21 @@ class ServiceGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'service/service';
+    protected $stub = 'migration/metadata';
+
 
     /**
-     * Get Class type.
+     * Get migration name.
      *
      * @return string
      */
-    public function getClassType()
+    public function getMigrationName()
     {
-        return 'service';
+        return strtolower('create_' . str_plural($this->name) . '_metadata_table');
     }
+
+
+
+
 
 }

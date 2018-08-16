@@ -1,33 +1,33 @@
 <?php
 
-$NAMESPACE$
+namespace $NAMESPACE$;
 
 use Illuminate\Http\Request;
 use Prettus\Validator\Exceptions\ValidatorException;
-use $APPNAME$Http\Requests\$CLASS$CreateRequest;
-use $APPNAME$Http\Requests\$CLASS$UpdateRequest;
-use $APPNAME$Services\$SERVICE$;
-$VALIDATOR$
+use $APPNAME$\Http\Requests\$NAME$CreateRequest;
+use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
+use $APPNAME$\Services\$SERVICE$;
+use $APPNAME$\Validators\$VALIDATOR$;
 
 /**
- * Class $CONTROLLER$Controller.
+ * Class $CONTROLLER$.
  *
  * @package $NAMESPACE$
  */
-class $CONTROLLER$Controller extends Controller
+class $CONTROLLER$ extends Controller
 {
     /**
-     * @var $CLASS$Service
+     * @var $NAME$Service
      */
     protected $service;
 
     /**
-     * $CONTROLLER$Controller constructor.
+     * $CONTROLLER$ constructor.
      *
-     * @param $CLASS$Service $service
-     * @param $CLASS$Validator $validator
+     * @param $NAME$Service $service
+     * @param $NAME$Validator $validator
      */
-    public function __construct($CLASS$Service $service)
+    public function __construct($NAME$Service $service)
     {
         $this->service = $service;
     }
@@ -54,13 +54,13 @@ class $CONTROLLER$Controller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  $CLASS$CreateRequest $request
+     * @param  $NAME$CreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store($CLASS$CreateRequest $request)
+    public function store($NAME$CreateRequest $request)
     {
 
         $$SINGULAR$ = $this->service->create($request);
@@ -77,7 +77,7 @@ class $CONTROLLER$Controller extends Controller
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } else {
             $response = [
-                'message' => '$CLASS$ created.',
+                'message' => '$NAME$ created.',
                 'data'    => $$SINGULAR$->toArray(),
             ];
 
@@ -130,21 +130,21 @@ class $CONTROLLER$Controller extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  $CLASS$UpdateRequest $request
+     * @param  $NAME$UpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update($CLASS$UpdateRequest $request, $id)
+    public function update($NAME$UpdateRequest $request, $id)
     {
         try {
 
             $$SINGULAR$ = $this->service->update($request, $id);
 
             $response = [
-                'message' => '$CLASS$ updated.',
+                'message' => '$NAME$ updated.',
                 'data'    => $$SINGULAR$->toArray(),
             ];
 
@@ -183,11 +183,11 @@ class $CONTROLLER$Controller extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => '$CLASS$ deleted.',
+                'message' => '$NAME$ deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', '$CLASS$ deleted.');
+        return redirect()->back()->with('message', '$NAME$ deleted.');
     }
 }

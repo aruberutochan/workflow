@@ -9,7 +9,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ServiceCommand extends Command
+class GenerateServiceCommand extends Command
 {
 
     /**
@@ -17,14 +17,14 @@ class ServiceCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:service';
+    protected $name = 'wf:generate:service';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Create a new Service.';
+    protected $description = 'Create a new Service with Service layer.';
 
     /**
      * The type of class being generated.
@@ -34,11 +34,11 @@ class ServiceCommand extends Command
     protected $type = 'Service';
 
     /**
-     * ControllerCommand constructor.
+     * ServiceCommand constructor.
      */
     public function __construct()
     {
-        $this->name = 'make:service';
+        $this->name = 'wf:generate:service';
         parent::__construct();
     }
 
@@ -60,14 +60,24 @@ class ServiceCommand extends Command
     public function fire()
     {
         try {
-            (new ServiceGenerator([
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
-            ]))->run();
+            // // Generate create request for service
+            // $this->call('generate:request', [
+            //     'name' => $this->argument('name') . 'Create',
+            //     'path' => $this->option('path') . '/Requests'
+            // ]);
+
+            // // Generate update request for service
+            // $this->call('make:aru-request', [
+            //     'name' => $this->argument('name') . 'Update',
+            //     'path' => $this->option('path') . '/Requests'
+            // ]);
+
+            (new ServiceGenerator(array_merge($this->arguments(), $this->options() )))->run();
 
             $this->info($this->type . ' created successfully.');
 
         } catch (FileAlreadyExistsException $e) {
+
             $this->error($this->type . ' already exists!');
 
             return false;
@@ -108,6 +118,23 @@ class ServiceCommand extends Command
                 'Force the creation if file already exists.',
                 null
             ],
+            [
+                'path',
+                'p',
+                InputOption::VALUE_REQUIRED,
+                'The http base path where the service will be generated.',
+                config('workflow.http', '/Http'),
+
+            ],
+            [
+                'root-namespace',
+                'r',
+                InputOption::VALUE_REQUIRED,
+                'The base namespace of the generated files',
+                config('workflow.rootNamespace', 'App\\'),
+
+            ],
+
         ];
     }
 }
