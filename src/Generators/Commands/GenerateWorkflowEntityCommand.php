@@ -157,7 +157,7 @@ class GenerateWorkflowEntityCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the entity will be generated.',
-                config('workflow.http', '/Http'),
+                config('workflow.basePath', app()->path()),
 
             ],
             [
