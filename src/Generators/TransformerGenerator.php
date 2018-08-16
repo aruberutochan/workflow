@@ -6,10 +6,10 @@ use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
 
 /**
- * Class ServiceGenerator
+ * Class TransformerGenerator
  * @package Aruberuto\Workflow\Generators
  */
-class ServiceGenerator extends Generator
+class TransformerGenerator extends Generator
 {
     public function __construct(array $options = []) {
         parent::__construct($options);
@@ -38,7 +38,7 @@ class ServiceGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'service/service';
+    protected $stub = 'transformer/transformer';
 
     /**
      * Get Class type.
@@ -47,7 +47,7 @@ class ServiceGenerator extends Generator
      */
     public function getClassType()
     {
-        return 'service';
+        return 'transformer';
     }
 
 }

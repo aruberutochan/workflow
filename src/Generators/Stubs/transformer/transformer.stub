@@ -1,0 +1,33 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use League\Fractal\TransformerAbstract;
+use $APPNAME$\Entities\$NAME$;
+
+/**
+ * Class $CLASS$.
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASS$ extends TransformerAbstract
+{
+    /**
+     * Transform the $NAME$ entity.
+     *
+     * @param \$APPNAME$\Entities\$NAME$ $model
+     *
+     * @return array
+     */
+    public function transform($NAME$ $model)
+    {
+        return [
+            'id'         => (int) $model->id,
+
+            /* place your other model properties here */
+
+            'created_at' => $model->created_at,
+            'updated_at' => $model->updated_at
+        ];
+    }
+}

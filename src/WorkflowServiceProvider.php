@@ -37,11 +37,22 @@ class WorkflowServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateServiceCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateControllerCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateCriteriaCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateEntityCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateModelCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GeneratePresenterCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateRequestCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateServiceCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateTransformerCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateValidatorCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateWorkflowEntityCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateMigrationCommand');
+
+
     }
+
+
 
 
     /**

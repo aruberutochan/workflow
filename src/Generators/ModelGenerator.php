@@ -1,15 +1,16 @@
 <?php
 namespace Aruberuto\Workflow\Generators;
 use Aruberuto\Workflow\Generators\Generator;
+use Illuminate\Support\Str;
 use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
 
 /**
- * Class ServiceGenerator
+ * Class ModelGenerator
  * @package Aruberuto\Workflow\Generators
  */
-class ServiceGenerator extends Generator
+class ModelGenerator extends Generator
 {
     public function __construct(array $options = []) {
         parent::__construct($options);
@@ -38,7 +39,7 @@ class ServiceGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'service/service';
+    protected $stub = 'model';
 
     /**
      * Get Class type.
@@ -47,7 +48,49 @@ class ServiceGenerator extends Generator
      */
     public function getClassType()
     {
-        return 'service';
+        return 'model';
+    }
+
+    /**
+     * Get class name.
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        $class = $this->getName();
+        return Str::studly(class_basename($class));
+    }
+
+        /**
+     * Get array replacements.
+     *
+     * @return array
+     */
+    public function getReplacements()
+    {
+        return array_merge(parent::getReplacements(), [
+            'fillable' => $this->getFillable()
+        ]);
+    }
+
+    /**
+     * Get the fillable attributes.
+     *
+     * @return string
+     */
+    public function getFillable()
+    {
+        if (!$this->fillable) {
+            return '[]';
+        }
+        $results = '[' . PHP_EOL;
+
+        foreach ($this->getSchemaParser()->toArray() as $column => $value) {
+            $results .= "\t\t'{$column}'," . PHP_EOL;
+        }
+
+        return $results . "\t" . ']';
     }
 
 }
