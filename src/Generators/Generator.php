@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 
+// use Illuminate\Support\Facades\Log;
+
 abstract class Generator
 {
 
@@ -119,8 +121,8 @@ abstract class Generator
      */
     public function getBasePath()
     {
-        $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path()  .'/'. config('workflow.basePath', app()->path());
-
+        $base_path = $this->hasOption('path') && $this->path ? base_path() .'/'. $this->normalizePath($this->path): base_path()  .'/'. config('workflow.appPath', 'app');
+        // Log::debug($base_path);
         return $this->normalizePath($base_path);
     }
 
@@ -136,7 +138,9 @@ abstract class Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. str_replace('\\', '/', $this->getParentNameOfClassRoute()) .'/'. $this->getClass() . '.php';
+        $return = $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. str_replace('\\', '/', $this->getParentNameOfClassRoute()) . $this->getClass() . '.php';
+        // Log::debug($return);
+        return $return;
     }
 
     /**
@@ -224,7 +228,7 @@ abstract class Generator
      */
     public function getRootNamespace()
     {
-        return $this->hasOption('root-namespace')? $this->option('root-namespace') : config('workflow.rootNamespace', $this->getAppNamespace());
+        return $this->hasOption('root-namespace') && $this->option('root-namespace') ? $this->option('root-namespace') : config('workflow.rootNamespace', $this->getAppNamespace());
     }
 
     public function getNameByClassType($class) {

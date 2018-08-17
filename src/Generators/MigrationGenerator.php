@@ -5,6 +5,7 @@ use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
 use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Log;
 
 /**
  * Class MigrationGenerator
@@ -58,7 +59,8 @@ class MigrationGenerator extends Generator
      */
     public function getBasePath()
     {
-        $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path()  .'/'. config('workflow.basePath', database_path('migrations'));
+
+        $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path() ;
 
         return $this->normalizePath($base_path);
     }
@@ -71,7 +73,10 @@ class MigrationGenerator extends Generator
      */
     public function getPath()
     {
-        return $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. $this->getFileName() . '.php';
+        $return =  $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. $this->getFileName() . '.php';
+        // Log::debug($return);
+        return $return;
+
     }
 
     /**

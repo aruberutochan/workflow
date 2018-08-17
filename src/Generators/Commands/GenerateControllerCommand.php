@@ -123,7 +123,7 @@ class GenerateControllerCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the controller will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [
@@ -131,7 +131,7 @@ class GenerateControllerCommand extends Command
                 'r',
                 InputOption::VALUE_REQUIRED,
                 'The base namespace of the generated files',
-                config('workflow.rootNamespace', 'App\\'),
+                config('workflow.rootNamespace', 'App'),
 
             ],
 
