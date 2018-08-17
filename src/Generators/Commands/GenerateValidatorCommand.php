@@ -123,7 +123,7 @@ class GenerateValidatorCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the validator will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [

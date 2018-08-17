@@ -136,7 +136,7 @@ class GenerateMigrationCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the migration will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [

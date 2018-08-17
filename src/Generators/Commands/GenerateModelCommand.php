@@ -123,7 +123,7 @@ class GenerateModelCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the model will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [

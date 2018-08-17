@@ -123,7 +123,7 @@ class GeneratePresenterCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the presenter will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [
