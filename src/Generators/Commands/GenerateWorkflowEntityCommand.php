@@ -56,10 +56,14 @@ class GenerateWorkflowEntityCommand extends Command
     public function sameOptionsAndArguments() {
         $result = [];
         foreach($this->arguments() as $argument => $value ) {
-            $result[$argument] = $value;
+            if($value) {
+                $result[$argument] = $value;
+            }
         }
         foreach($this->options() as $option => $value ) {
-            $result['--' . $option] = $value;
+            if($value) {
+                $result['--' . $option] = $value;
+            }
         }
 
         return $result;
@@ -157,7 +161,7 @@ class GenerateWorkflowEntityCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the entity will be generated.',
-                config('workflow.http', '/Http'),
+                null,
 
             ],
             [

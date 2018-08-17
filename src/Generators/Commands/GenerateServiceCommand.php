@@ -123,7 +123,7 @@ class GenerateServiceCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the service will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [

@@ -8,8 +8,9 @@
 */
 return [
 
-    'basePath'      => app()->path(),
-    'rootNamespace' => 'App\\',
+    'appPath'       => 'app',
+    'migrationPath' => 'database/migrations',
+    'rootNamespace' => 'App',
     'stubsOverridePath' => app()->path(),
     'modelPath'       => 'Entities',
     'repositoryPath' => 'Repositories',

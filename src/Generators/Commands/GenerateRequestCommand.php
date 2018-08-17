@@ -123,7 +123,7 @@ class GenerateRequestCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the request will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [

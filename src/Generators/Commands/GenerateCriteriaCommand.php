@@ -123,7 +123,7 @@ class GenerateCriteriaCommand extends Command
                 'p',
                 InputOption::VALUE_REQUIRED,
                 'The http base path where the criteria will be generated.',
-                config('workflow.http', '/Http'),
+                null
 
             ],
             [
