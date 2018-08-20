@@ -48,6 +48,10 @@ class WorkflowServiceProvider extends ServiceProvider
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateValidatorCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateWorkflowEntityCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateMigrationCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateRepositoryCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateResourceCommand');
+
+
 
 
     }

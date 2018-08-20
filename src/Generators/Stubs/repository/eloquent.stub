@@ -4,16 +4,17 @@ namespace $NAMESPACE$;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use $REPOSITORY$
-use $MODEL$;
-$USE_VALIDATOR$
+use $APPNAME$\Repositories\$CLASS$Interface;
+use $APPNAME$\Entities\$NAME$;
+use $APPNAME$\Validators\$NAME$Validator;
+use $APPNAME$\Presenters\$NAME$Presenter;
 
 /**
- * Class $CLASS$RepositoryEloquent.
+ * Class $CLASS$.
  *
  * @package $NAMESPACE$
  */
-class $CLASS$RepositoryEloquent extends BaseRepository implements $CLASS$Repository
+class $CLASS$ extends BaseRepository implements $CLASS$Interface
 {
     /**
      * Specify Model class name
@@ -22,10 +23,31 @@ class $CLASS$RepositoryEloquent extends BaseRepository implements $CLASS$Reposit
      */
     public function model()
     {
-        return $CLASS$::class;
+        return $NAME$::class;
     }
 
-    $VALIDATOR$
+    /**
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
+    public function validator()
+    {
+
+        return $NAME$Validator::class;
+    }
+
+
+
+    // /**
+    //  * Specify the presenter class
+    //  *
+    //  * @return string
+    //  */
+    // public function presenter()
+    // {
+    //     return $NAME$Presenter::class;
+    // }
 
     /**
      * Boot up the repository, pushing criteria
