@@ -5,11 +5,11 @@ namespace $NAMESPACE$;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface $CLASS$Repository.
+ * Interface $CLASS$Interface.
  *
  * @package $NAMESPACE$
  */
-interface $CLASS$Repository extends RepositoryInterface
+interface $CLASS$Interface extends RepositoryInterface
 {
     //
 }

@@ -98,7 +98,7 @@ class MigrationGenerator extends Generator
      */
     public function getFileName()
     {
-        return (new \DateTime())->format('Y_m_d_His_u_') . $this->getMigrationName();
+        return (new \DateTime())->format('Y_m_d_Hisu_') . $this->getMigrationName();
     }
 
 

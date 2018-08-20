@@ -3,10 +3,11 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Http\Request;
+use Aruberuto\Workflow\Services\AbstractService;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use $APPNAME$\Http\Requests\$NAME$CreateRequest;
 use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
-use $APPNAME$\Repositories\$REPOSITORY$;
+use $APPNAME$\Repositories\$REPOSITORY$Interface;
 use $APPNAME$\Validators\$VALIDATOR$;
 
 /**
@@ -14,7 +15,7 @@ use $APPNAME$\Validators\$VALIDATOR$;
  *
  * @package $NAMESPACE$
  */
-class $SERVICE$ extends AruAbstractService
+class $SERVICE$ extends AbstractService
 {
     /**
      * @var $NAME$Repository
@@ -27,12 +28,17 @@ class $SERVICE$ extends AruAbstractService
     protected $validator;
 
     /**
+     * @var $NAME$ Relations Array
+     */
+    protected $relations = [];
+
+    /**
      * $SERVICE$Service constructor.
      *
      * @param $NAME$Repository $repository
      * @param $NAME$Validator $validator
      */
-    public function __construct($NAME$Repository $repository, $NAME$Validator $validator)
+    public function __construct($NAME$RepositoryInterface $repository, $NAME$Validator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -47,7 +53,7 @@ class $SERVICE$ extends AruAbstractService
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
 
-        return $this->repository->all();
+        return $this->repository->with($this->relations)->all();
 
     }
 
@@ -65,15 +71,9 @@ class $SERVICE$ extends AruAbstractService
         }
     }
 
-    public function show($id)
+    public function get($id)
     {
-        return $this->repository->find($id);
-
-    }
-
-    public function edit($id)
-    {
-        return $this->repository->find($id);
+        return $this->repository->with($this->relations)->find($id);
 
     }
 

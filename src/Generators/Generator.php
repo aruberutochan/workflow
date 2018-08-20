@@ -266,6 +266,9 @@ abstract class Generator
             case ('controller' === $class):
                 $path = config('workflow.controllerPath', 'Http\Controllers');
                 break;
+            case ('resource' === $class):
+                $path = config('workflow.resourcePath', 'Http\Resources');
+                break;
             case ('request' === $class):
                 $path = config('workflow.requestPath', 'Http\Requests');
                 break;

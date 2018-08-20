@@ -19,6 +19,7 @@ return [
     'presentersath'   => 'Presenters',
     'validatorPath'   => 'Validators',
     'controllerPath'  => 'Http/Controllers',
+    'resourcePath'      => 'Http/Resources',
     'httpPath'         => 'Http',
     'providerPath'     => 'RepositoryServiceProvider',
     'criteriaPath'     => 'Criteria',

@@ -3,13 +3,13 @@ namespace Aruberuto\Workflow\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Aruberuto\Workflow\Generators\EntityGenerator;
+use Aruberuto\Workflow\Generators\RepositoryGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class GenerateWorkflowEntityCommand extends Command
+class GenerateRepositoryCommand extends Command
 {
 
     /**
@@ -17,28 +17,28 @@ class GenerateWorkflowEntityCommand extends Command
      *
      * @var string
      */
-    protected $name = 'wf:generate:workflow';
+    protected $name = 'wf:generate:repository';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Create a new Workflow complete Entity with Service layer.';
+    protected $description = 'Create a new Repository with Service layer.';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Workflow';
+    protected $type = 'Repository';
 
     /**
-     * EntityCommand constructor.
+     * RepositoryCommand constructor.
      */
     public function __construct()
     {
-        $this->name = 'wf:generate:workflow';
+        $this->name = 'wf:generate:repository';
         parent::__construct();
     }
 
@@ -49,24 +49,7 @@ class GenerateWorkflowEntityCommand extends Command
      * @return void
      */
     public function handle(){
-
         $this->laravel->call([$this, 'fire'], func_get_args());
-    }
-
-    public function sameOptionsAndArguments() {
-        $result = [];
-        foreach($this->arguments() as $argument => $value ) {
-            if($value) {
-                $result[$argument] = $value;
-            }
-        }
-        foreach($this->options() as $option => $value ) {
-            if($value) {
-                $result['--' . $option] = $value;
-            }
-        }
-
-        return $result;
     }
 
     /**
@@ -77,50 +60,19 @@ class GenerateWorkflowEntityCommand extends Command
     public function fire()
     {
         try {
-            // // Generate create request for entity
+            // // Generate create request for repository
             // $this->call('generate:request', [
             //     'name' => $this->argument('name') . 'Create',
             //     'path' => $this->option('path') . '/Requests'
             // ]);
 
-            // // Generate update request for entity
+            // // Generate update request for repository
             // $this->call('make:aru-request', [
             //     'name' => $this->argument('name') . 'Update',
             //     'path' => $this->option('path') . '/Requests'
             // ]);
-            $sameArguments = $this->sameOptionsAndArguments();
 
-            $updateRequestArguments = $sameArguments;
-            $createRequestArguments = $sameArguments;
-            $metadataMigrationArguments = $sameArguments;
-            $resourceCollectionArguments = $sameArguments;
-
-            $updateRequestArguments['name'] = $this->argument('name') . 'Update';
-            $createRequestArguments['name'] = $this->argument('name') . 'Create';
-            $metadataMigrationArguments['--metadata'] = true;
-            $resourceCollectionArguments['--collection'] = true;
-
-            $this->call('wf:generate:controller', $sameArguments);
-            $this->call('wf:generate:repository', $sameArguments);
-
-            $this->call('wf:generate:criteria', $sameArguments);
-            $this->call('wf:generate:model', $sameArguments);
-
-            $this->call('wf:generate:migration', $sameArguments);
-            $this->call('wf:generate:migration', $metadataMigrationArguments);
-
-            $this->call('wf:generate:request', $updateRequestArguments);
-            $this->call('wf:generate:request', $createRequestArguments);
-
-            $this->call('wf:generate:service', $sameArguments);
-
-            // $this->call('wf:generate:presenter', $sameArguments);
-            // $this->call('wf:generate:transformer', $sameArguments);
-
-            $this->call('wf:generate:resource', $sameArguments);
-            $this->call('wf:generate:resource', $resourceCollectionArguments);
-
-            $this->call('wf:generate:validator', $sameArguments);
+            (new RepositoryGenerator(array_merge($this->arguments(), $this->options() )))->run();
 
             $this->info($this->type . ' created successfully.');
 
@@ -170,8 +122,8 @@ class GenerateWorkflowEntityCommand extends Command
                 'path',
                 'p',
                 InputOption::VALUE_REQUIRED,
-                'The http base path where the entity will be generated.',
-                null,
+                'The http base path where the repository will be generated.',
+                null
 
             ],
             [
@@ -179,7 +131,7 @@ class GenerateWorkflowEntityCommand extends Command
                 'r',
                 InputOption::VALUE_REQUIRED,
                 'The base namespace of the generated files',
-                config('workflow.rootNamespace', 'App\\'),
+                config('workflow.rootNamespace', 'App'),
 
             ],
 

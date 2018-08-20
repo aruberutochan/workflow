@@ -4,10 +4,14 @@ namespace $NAMESPACE$;
 
 use Illuminate\Http\Request;
 use Prettus\Validator\Exceptions\ValidatorException;
+use App\Http\Controllers\Controller;
 use $APPNAME$\Http\Requests\$NAME$CreateRequest;
 use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
+use $APPNAME$\Http\Resources\$NAME$Resource;
+use $APPNAME$\Http\Resources\$NAME$CollectionResource;
 use $APPNAME$\Services\$SERVICE$;
 use $APPNAME$\Validators\$VALIDATOR$;
+
 
 /**
  * Class $CONTROLLER$.
@@ -43,9 +47,11 @@ class $CONTROLLER$ extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
-                'data' => $$PLURAL$,
-            ]);
+            // return response()->json([
+            //     'data' => $games,
+            // ]);
+
+            return new $NAME$CollectionResource($$PLURAL$ );
         }
 
         return view('$PLURAL$.index', compact('$PLURAL$'));
@@ -101,13 +107,10 @@ class $CONTROLLER$ extends Controller
      */
     public function show($id)
     {
-        $$SINGULAR$ = $this->service->find($id);
+        $$SINGULAR$ = $this->service->get($id);
 
         if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $$SINGULAR$,
-            ]);
+            return new $NAME$Resource($$SINGULAR$ );
         }
 
         return view('$PLURAL$.show', compact('$SINGULAR$'));
@@ -122,7 +125,7 @@ class $CONTROLLER$ extends Controller
      */
     public function edit($id)
     {
-        $$SINGULAR$ = $this->service->find($id);
+        $$SINGULAR$ = $this->service->get($id);
 
         return view('$PLURAL$.edit', compact('$SINGULAR$'));
     }
