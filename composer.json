@@ -21,7 +21,8 @@
     },
     "require": {
         "prettus/l5-repository": "^2.6.25",
-        "league/fractal": "^0.13.0@dev"
+        "league/fractal": "^0.13.0@dev",
+        "kodeine/laravel-meta": "dev-master"
     },
     "require-dev": {
     }

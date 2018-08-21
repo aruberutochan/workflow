@@ -3,17 +3,22 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
+use Kodeine\Metable\Metable;
 
 /**
  * Class $CLASS$.
  *
  * @package $NAMESPACE$
  */
-class $CLASS$ extends Model implements Transformable
-{
-    use TransformableTrait;
+class $CLASS$ extends Model {
+    use Metable;
+
+    /**
+     * The database table for metadata.
+     *
+     * @var array
+     */
+    protected $metaTable = '$PLURAL$_meta';
 
     /**
      * The attributes that are mass assignable.
