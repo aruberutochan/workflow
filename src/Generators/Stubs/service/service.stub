@@ -30,7 +30,7 @@ class $SERVICE$ extends AbstractService
     /**
      * @var $NAME$ Relations Array
      */
-    protected $relations = [];
+    protected $relations = ['metas'];
 
     /**
      * $SERVICE$Service constructor.
