@@ -50,6 +50,10 @@ class WorkflowServiceProvider extends ServiceProvider
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateMigrationCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateRepositoryCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateResourceCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateSeederCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateFactoryCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateProviderCommand');
+
 
 
 

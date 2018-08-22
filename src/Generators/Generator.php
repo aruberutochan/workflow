@@ -138,6 +138,7 @@ abstract class Generator
      */
     public function getPath()
     {
+
         $return = $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. str_replace('\\', '/', $this->getParentNameOfClassRoute()) . $this->getClass() . '.php';
         // Log::debug($return);
         return $return;
@@ -275,11 +276,17 @@ abstract class Generator
             case ('migration' === $class):
                 $path = config('workflow.migrationPath', 'database\migrations');
                 break;
+            case ('seeder' === $class):
+                $path = config('workflow.seederPath', 'database\seeds');
+                break;
+            case ('factory' === $class):
+                $path = config('workflow.factoryPath', 'database\factories');
+                break;
             case ('service' === $class):
                 $path = config('workflow.servicePath', 'Services');
                 break;
             case ('provider' === $class):
-                $path = config('workflow.providerPath', 'RepositoryServiceProvider');
+                $path = config('workflow.providerPath', 'Providers');
                 break;
             case ('criteria' === $class):
                 $path = config('workflow.criteriaPath', 'Criteria');

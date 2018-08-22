@@ -109,6 +109,9 @@ class GenerateWorkflowEntityCommand extends Command
             $this->call('wf:generate:migration', $sameArguments);
             $this->call('wf:generate:migration', $metadataMigrationArguments);
 
+            $this->call('wf:generate:seeder', $sameArguments);
+            $this->call('wf:generate:factory', $sameArguments);
+
             $this->call('wf:generate:request', $updateRequestArguments);
             $this->call('wf:generate:request', $createRequestArguments);
 
@@ -121,6 +124,9 @@ class GenerateWorkflowEntityCommand extends Command
             $this->call('wf:generate:resource', $resourceCollectionArguments);
 
             $this->call('wf:generate:validator', $sameArguments);
+
+            $this->call('wf:generate:provider', $sameArguments);
+
 
             $this->info($this->type . ' created successfully.');
 

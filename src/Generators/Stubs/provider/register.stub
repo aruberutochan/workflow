@@ -1,0 +1,2 @@
+$this->app->bind("$APPNAME$\Repositories\$NAME$RepositoryInterface", "$APPNAME$\Repositories\$NAME$Repository");
+        //:registerMethodProvider:
