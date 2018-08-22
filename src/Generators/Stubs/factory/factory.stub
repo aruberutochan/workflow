@@ -1,0 +1,33 @@
+<?php
+
+use Faker\Generator as Faker;
+
+$factory->define($APPNAME$\Entities\$NAME$::class, function (Faker $faker) {
+    return [
+
+        /*
+        |--------------------------------
+        | Example of use of faker
+        |--------------------------------
+        */
+
+        // 'user_id' => \App\User::inRandomOrder()->first()->id,
+        // 'title' => $faker->sentence,
+        // 'status' => $faker->randomElement(['active', 'closed']),
+        // 'description' => $faker->paragraph,
+
+        /*
+        |--------------------------------
+        | factories with relationships
+        |--------------------------------
+        */
+
+        // // 'relation_id' => function() {
+        // //     return factory($APPNAME$\Entities\Relation::class)->create()->id;
+        // // },
+        // // 'inverse_relation_id' => function (array $$SINGULAR$) {
+        // //     return $APPNAME$\Entities\Relation::find($$SINGULAR$['relation_id'])->inverse_relation_id;
+        // // }
+
+    ];
+});

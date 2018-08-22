@@ -1,0 +1,2 @@
+$this->app->make('$APPNAME$\Http\Controllers\$NAME$Controller');
+        //:bootMethodProvider:

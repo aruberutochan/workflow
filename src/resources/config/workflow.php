@@ -10,6 +10,8 @@ return [
 
     'appPath'       => 'app',
     'migrationPath' => 'database/migrations',
+    'seederPath' => 'database/seeds',
+    'factoryPath' => 'database/factories',
     'rootNamespace' => 'App',
     'stubsOverridePath' => app()->path(),
     'modelPath'       => 'Entities',
@@ -21,7 +23,7 @@ return [
     'controllerPath'  => 'Http/Controllers',
     'resourcePath'      => 'Http/Resources',
     'httpPath'         => 'Http',
-    'providerPath'     => 'RepositoryServiceProvider',
+    'providerPath'     => 'Providers',
     'criteriaPath'     => 'Criteria',
     'servicesPath'     => 'Services'
 

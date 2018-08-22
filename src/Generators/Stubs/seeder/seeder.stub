@@ -1,0 +1,28 @@
+<?php
+namespace $APPNAME$\database\seeds;
+use Illuminate\Database\Seeder;
+
+class $CLASS$ extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        $$PLURAL$ = factory($APPNAME$\Entities\$NAME$::class, 10)
+           ->create();
+
+        // Append this if you want to use and create some relation
+
+        //    ->each(function ($$SINGULAR$) {
+        //         $rand = rand(3, 10);
+        //         for ($i=0; $i < $rand; $i++) {
+        //             $$SINGULAR$->relation()->save(factory($APPNAME$\Entities\Entities\Relation::class)->make());
+        //         }
+        //    });
+
+    }
+}
