@@ -97,13 +97,14 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $this->call('wf:generate:resource', $resourceCollectionArguments);
 
             $this->call('wf:generate:validator', $sameArguments);
-
-            $this->call('wf:generate:provider', $sameArguments);
             $this->call('wf:generate:view', $sameArguments);
+
+
 
             if($this->option('remove')) {
                 $this->info($this->type . ' remove successfully.');
             } else {
+                $this->call('wf:generate:provider', $sameArguments);
                 $this->info($this->type . ' created successfully.');
             }
 

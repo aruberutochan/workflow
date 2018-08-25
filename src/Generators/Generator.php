@@ -390,15 +390,22 @@ abstract class Generator
 
             $this->filesystem->delete($path);
             if($dirDelete) {
-                $otherFiles = $this->filesystem->allFiles(dirname($path));
-                if(count($otherFiles) === 0) {
-                    $this->filesystem->deleteDirectory(dirname($path));
-                }
+                $this->deleteIfEmpty(dirname($path));
             }
 
 
         } else {
             throw new FileNotFoundException($path);
+        }
+    }
+
+    public function deleteIfEmpty($dir) {
+        if ($this->filesystem->isDirectory($dir)) {
+            $otherFiles = $this->filesystem->allFiles($dir);
+            if(count($otherFiles) === 0) {
+                $this->filesystem->deleteDirectory($dir);
+            }
+
         }
     }
 

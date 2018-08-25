@@ -143,12 +143,8 @@ class MigrationGenerator extends Generator
         if($this->hasOption('path') && $this->option('path')) {
 
             $upDir = dirname(dirname($path));
-            if ($this->filesystem->isDirectory($upDir)) {
-                $otherFiles = $this->filesystem->allFiles($upDir);
-                if(count($otherFiles) === 0) {
-                    $this->filesystem->deleteDirectory($upDir);
-                }
-            }
+            $this->deleteIfEmpty($upDir);
+
         }
     }
 
