@@ -54,7 +54,17 @@ class $CONTROLLER$ extends Controller
             return new $NAME$CollectionResource($$PLURAL$ );
         }
 
-        return view('$PLURAL$.index', compact('$PLURAL$'));
+        return view('$VIEWS_PACKAGE$::$PLURAL$.index', compact('$PLURAL$'));
+    }
+
+    /**
+     * Display a Creation form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('$VIEWS_PACKAGE$::$PLURAL$.create');
     }
 
     /**
@@ -113,7 +123,7 @@ class $CONTROLLER$ extends Controller
             return new $NAME$Resource($$SINGULAR$ );
         }
 
-        return view('$PLURAL$.show', compact('$SINGULAR$'));
+        return view('$VIEWS_PACKAGE$::$PLURAL$.show', compact('$SINGULAR$'));
     }
 
     /**
@@ -127,7 +137,7 @@ class $CONTROLLER$ extends Controller
     {
         $$SINGULAR$ = $this->service->get($id);
 
-        return view('$PLURAL$.edit', compact('$SINGULAR$'));
+        return view('$VIEWS_PACKAGE$::$PLURAL$.edit', compact('$SINGULAR$'));
     }
 
     /**

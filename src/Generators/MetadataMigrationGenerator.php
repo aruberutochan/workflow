@@ -54,7 +54,4 @@ class MetadataMigrationGenerator extends MigrationGenerator
     }
 
 
-
-
-
 }

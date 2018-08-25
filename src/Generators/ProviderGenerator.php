@@ -19,7 +19,7 @@ class ProviderGenerator extends Generator
         // foreach($methods as $method) {
         //     if(
         //         $method->getNumberOfParameters() != 0 ||
-        //         in_array($method->name, ['run', '__construct', 'getStub', 'bootAndRegisterStub'])
+        //         in_array($method->name, ['run', '__construct', 'getStub', 'bootAndRegisterStub', 'getBootStub', 'getregisterStub'])
 
         //     ) {
         //         $result[$method->name] = "NOT_FIRED";
@@ -66,27 +66,6 @@ class ProviderGenerator extends Generator
         return 'provider';
     }
 
-
-
-    // /**
-    //  * Get destination path for generated file.
-    //  *
-    //  * @return string
-    //  */
-    // public function getPath()
-    // {
-
-    //     $rootNamespace = $this->getRootNamespace();
-    //     if ($rootNamespace == config('workflow.rootNamespace', 'App') ){
-    //         $return = $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. str_replace('\\', '', $this->getParentNameOfClassRoute()) . 'WorkflowServiceProvider.php';
-    //     } else {
-    //         $return = $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. str_replace('\\', '/', $this->getParentNameOfClassRoute())  . $this->getProviderName() . '.php';
-    //     }
-
-    //     // Log::debug($return);
-    //     return $return;
-    // }
-
     /**
      * Get class name.
      *
@@ -104,10 +83,9 @@ class ProviderGenerator extends Generator
     }
 
     public function getProviderName() {
-        $rootNamespace = explode('\\', $this->getRootNamespace());
-        $return = end($rootNamespace) . 'ServiceProvider';
-        return $return;
 
+        $return = $this->getPackageName() . 'ServiceProvider';
+        return $return;
     }
 
     /**
@@ -121,14 +99,20 @@ class ProviderGenerator extends Generator
         $this->setUp();
         $path = $this->getPath();
 
-        if (!$this->filesystem->isDirectory($dir = dirname($path))) {
-            $this->filesystem->makeDirectory($dir, 0777, true, true);
-        }
-        if (!$this->filesystem->exists($path)) {
-            $this->filesystem->put($path, $this->getStub());
+        if($this->option('remove')) {
+            $this->removeRun($path);
+        } else {
+            if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+                $this->filesystem->makeDirectory($dir, 0777, true, true);
+            }
+            if (!$this->filesystem->exists($path)) {
+                $this->filesystem->put($path, $this->getStub());
+            }
+
+            $this->bootAndRegisterStub();
         }
 
-        $this->bootAndRegisterStub();
+
     }
 
     public function bootAndRegisterStub() {

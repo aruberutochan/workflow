@@ -128,6 +128,30 @@ class MigrationGenerator extends Generator
         return '// Here comes the new fields';
     }
 
+    public function removeRun($path, $dirDelete = false) {
+        $migration_files = $this->filesystem->files(dirname($path));
+        foreach($migration_files as $file) {
+            if(strpos($file->getFilename(), $this->getMigrationName() ) !== false) {
+                if($this->hasOption('path') && $this->option('path')) {
+                    parent::removeRun($file->getPathname(), true);
+                } else {
+                    parent::removeRun($file->getPathname(), false);
+                }
+            }
+        }
+        // Two levels of delete directories
+        if($this->hasOption('path') && $this->option('path')) {
+
+            $upDir = dirname(dirname($path));
+            if ($this->filesystem->isDirectory($upDir)) {
+                $otherFiles = $this->filesystem->allFiles($upDir);
+                if(count($otherFiles) === 0) {
+                    $this->filesystem->deleteDirectory($upDir);
+                }
+            }
+        }
+    }
+
 
 
 }
