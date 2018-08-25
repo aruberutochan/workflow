@@ -81,6 +81,20 @@ class SeederGenerator extends Generator
         return '// Here comes the new fields';
     }
 
+    public function removeRun($path, $dirDelete = true) {
+        parent::removeRun($path);
+        // Two levels of delete directories
+        $upDir = dirname(dirname($path));
+        if ($this->filesystem->isDirectory($upDir)) {
+            $otherFiles = $this->filesystem->allFiles($upDir);
+            if(count($otherFiles) === 0) {
+                $this->filesystem->deleteDirectory($upDir);
+            }
+
+        }
+
+    }
+
 
 
 }

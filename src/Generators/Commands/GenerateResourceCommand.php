@@ -1,17 +1,11 @@
 <?php
 namespace Aruberuto\Workflow\Generators\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
-use Aruberuto\Workflow\Generators\ResourceGenerator;
+use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
 use Aruberuto\Workflow\Generators\ResourceCollectionGenerator;
-
-use Prettus\Repository\Generators\FileAlreadyExistsException;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class GenerateResourceCommand extends Command
+class GenerateResourceCommand extends AbstractGenerateCommand
 {
 
     /**
@@ -44,17 +38,7 @@ class GenerateResourceCommand extends Command
         parent::__construct();
     }
 
-    /**
-     * Execute the command.
-     *
-     * @see fire()
-     * @return void
-     */
-    public function handle(){
-        $this->laravel->call([$this, 'fire'], func_get_args());
-    }
-
-    /**
+        /**
      * Execute the command.
      *
      * @return void
@@ -76,40 +60,28 @@ class GenerateResourceCommand extends Command
             if($this->option('collection')) {
                 (new ResourceCollectionGenerator(array_merge($this->arguments(), $this->options() )))->run();
 
-                $this->info($this->type . ' created successfully.');
-
             } else {
                 (new ResourceGenerator(array_merge($this->arguments(), $this->options() )))->run();
-
+            }
+            if($this->option('remove')) {
+                $this->info($this->type . ' remove successfully.');
+            } else {
                 $this->info($this->type . ' created successfully.');
             }
-
 
         } catch (FileAlreadyExistsException $e) {
 
             $this->error($this->type . ' already exists!');
 
             return false;
+        } catch (FileNotFoundException $e) {
+
+            $this->error($this->type . ' not found!');
+
+            return false;
         }
     }
 
-
-    /**
-     * The array of command arguments.
-     *
-     * @return array
-     */
-    public function getArguments()
-    {
-        return [
-            [
-                'name',
-                InputArgument::REQUIRED,
-                'The name of model for which the Service is being generated.',
-                null
-            ],
-        ];
-    }
 
 
     /**
@@ -119,14 +91,8 @@ class GenerateResourceCommand extends Command
      */
     public function getOptions()
     {
-        return [
-            [
-                'force',
-                'f',
-                InputOption::VALUE_NONE,
-                'Force the creation if file already exists.',
-                null
-            ],
+        $parent = parent::getOptions();
+        $return = [
             [
                 'collection',
                 'c',
@@ -134,23 +100,9 @@ class GenerateResourceCommand extends Command
                 'Create a collection resource',
                 null
             ],
-            [
-                'path',
-                'p',
-                InputOption::VALUE_REQUIRED,
-                'The http base path where the resource will be generated.',
-                null
-
-            ],
-            [
-                'root-namespace',
-                'r',
-                InputOption::VALUE_REQUIRED,
-                'The base namespace of the generated files',
-                config('workflow.rootNamespace', 'App'),
-
-            ],
 
         ];
+
+        return array_merge($parent, $return);
     }
 }

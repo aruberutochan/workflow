@@ -6,10 +6,10 @@ use Prettus\Repository\Generators\ValidatorGenerator;
 use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
 
 /**
- * Class ResourceCollectionGenerator
+ * Class ViewGenerator
  * @package Aruberuto\Workflow\Generators
  */
-class ResourceCollectionGenerator extends Generator
+class ViewGenerator extends Generator
 {
     public function __construct(array $options = []) {
         parent::__construct($options);
@@ -38,11 +38,28 @@ class ResourceCollectionGenerator extends Generator
      *
      * @var string
      */
-    protected $stub = 'resource/collection';
+    protected $stub = null;
+    protected $viewsStub = [
+        'index' =>'view/index',
+        'create' =>'view/create',
+        'edit' =>'view/edit',
+        'show' =>'view/show',
+    ];
+    protected $currentView = null;
+    protected $allowedViews = ['index', 'create', 'edit', 'show'];
+    /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
 
-    public function getFileName() {
-        return $this->getName() . 'CollectionResource';
+        $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path() ;
+
+        return $this->normalizePath($base_path);
     }
+
 
     /**
      * Get destination path for generated file.
@@ -51,9 +68,32 @@ class ResourceCollectionGenerator extends Generator
      */
     public function getPath()
     {
-        $return = $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. $this->getFileName() . '.php';
+        $return =  $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. $this->getPluralName() .'/'. $this->currentView . '.blade.php';
         // Log::debug($return);
         return $return;
+
+    }
+
+
+    /**
+     * Run the generator.
+     *
+     * @return int
+     * @throws FileAlreadyExistsException
+     */
+    public function run()
+    {
+        foreach($this->option('views', []) as $view) {
+            if(in_array($view, $this->allowedViews) && isset($this->viewsStub) && isset($this->viewsStub[$view])) {
+                $this->currentView = $view;
+                $this->stub = $this->viewsStub[$view];
+                parent::run();
+            } else {
+                continue;
+            }
+
+        }
+
     }
 
     /**
@@ -63,7 +103,7 @@ class ResourceCollectionGenerator extends Generator
      */
     public function getClassType()
     {
-        return 'resource';
+        return 'view';
     }
 
     public function removeRun($path, $dirDelete = true) {

@@ -87,14 +87,20 @@ class RepositoryGenerator extends Generator
         parent::run();
 
         $path = $this->getInterfacePath();
-        if ($this->filesystem->exists($path) && !$this->force) {
-            throw new FileAlreadyExistsException($path);
-        }
-        if (!$this->filesystem->isDirectory($dir = dirname($path))) {
-            $this->filesystem->makeDirectory($dir, 0777, true, true);
+        if($this->option('remove')) {
+            $this->removeRun($path);
+        } else {
+            if ($this->filesystem->exists($path) && !$this->force) {
+                throw new FileAlreadyExistsException($path);
+            }
+            if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+                $this->filesystem->makeDirectory($dir, 0777, true, true);
+            }
+
+            return $this->filesystem->put($path, $this->getInterfaceStub());
+
         }
 
-        return $this->filesystem->put($path, $this->getInterfaceStub());
     }
 
     /**

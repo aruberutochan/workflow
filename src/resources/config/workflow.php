@@ -25,7 +25,8 @@ return [
     'httpPath'         => 'Http',
     'providerPath'     => 'Providers',
     'criteriaPath'     => 'Criteria',
-    'servicesPath'     => 'Services'
+    'servicesPath'     => 'Services',
+    'viewsPath'        => 'resources/views'
 
 
 ];

@@ -5,7 +5,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
-
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 // use Illuminate\Support\Facades\Log;
 
 abstract class Generator
@@ -72,6 +72,18 @@ abstract class Generator
         return $this;
     }
 
+    public function getVendorName() {
+        $rootNamespace = explode('\\', $this->getRootNamespace());
+        $return = isset($rootNamespace[0]) ?   $rootNamespace[0] : 'App';
+        return $return;
+    }
+
+    public function getPackageName() {
+        $rootNamespace = explode('\\', $this->getRootNamespace());
+        $return = end($rootNamespace) ? end($rootNamespace) : 'App';
+        return $return;
+    }
+
 
     /**
      * Get stub template for generated file.
@@ -110,6 +122,9 @@ abstract class Generator
             'validator'      => $this->getValidatorName(),
             'repository'     => $this->getRepositoryName(),
             'appname'        => $this->getRootNamespace(),
+            'vendorname'     => $this->getVendorName(),
+            'packagename'    => $this->getPackageName(),
+            'views_package'  => strtolower($this->getPackageName()),
         ];
     }
 
@@ -291,6 +306,9 @@ abstract class Generator
             case ('criteria' === $class):
                 $path = config('workflow.criteriaPath', 'Criteria');
                 break;
+            case ('view' === $class):
+                $path = config('workflow.viewPath', 'resources\views');
+                break;
             default:
                 $path = '';
         }
@@ -351,14 +369,37 @@ abstract class Generator
     {
         $this->setUp();
         $path = $this->getPath();
-        if ($this->filesystem->exists($path) && !$this->force) {
-            throw new FileAlreadyExistsException($path);
-        }
-        if (!$this->filesystem->isDirectory($dir = dirname($path))) {
-            $this->filesystem->makeDirectory($dir, 0777, true, true);
+        if($this->option('remove')) {
+            $this->removeRun($path);
+        } else {
+            if ($this->filesystem->exists($path) && !$this->force) {
+                throw new FileAlreadyExistsException($path);
+            }
+            if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+                $this->filesystem->makeDirectory($dir, 0777, true, true);
+            }
+
+            return $this->filesystem->put($path, $this->getStub());
         }
 
-        return $this->filesystem->put($path, $this->getStub());
+    }
+
+    public function removeRun($path, $dirDelete = true) {
+
+        if ($this->filesystem->exists($path)) {
+
+            $this->filesystem->delete($path);
+            if($dirDelete) {
+                $otherFiles = $this->filesystem->allFiles(dirname($path));
+                if(count($otherFiles) === 0) {
+                    $this->filesystem->deleteDirectory(dirname($path));
+                }
+            }
+
+
+        } else {
+            throw new FileNotFoundException($path);
+        }
     }
 
 

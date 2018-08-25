@@ -1,19 +1,15 @@
 <?php
 namespace Aruberuto\Workflow\Generators\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
-use Prettus\Repository\Generators\FileAlreadyExistsException;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-
 /**
  * Class EntityCommand
  * @package Prettus\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
-class GenerateEntityCommand extends Command
+class GenerateEntityCommand extends AbstractGenerateCommand
 {
 
     /**
@@ -180,6 +176,13 @@ class GenerateEntityCommand extends Command
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'The fillable attributes.',
+                null
+            ],
+            [
+                'remove',
+                null,
+                InputOption::VALUE_NONE,
+                'Remove the created files and directories if files exist.',
                 null
             ],
             [
