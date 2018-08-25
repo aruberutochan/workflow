@@ -4,7 +4,7 @@ namespace Aruberuto\Workflow\Generators\Commands;
 use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
 use Aruberuto\Workflow\Generators\ResourceCollectionGenerator;
 use Aruberuto\Workflow\Generators\ResourceGenerator;
-
+use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputOption;
 
 class GenerateResourceCommand extends AbstractGenerateCommand

@@ -54,13 +54,8 @@ class RequestGenerator extends Generator
         parent::removeRun($path);
         // Two levels of delete directories
         $upDir = dirname(dirname($path));
-        if ($this->filesystem->isDirectory($upDir)) {
-            $otherFiles = $this->filesystem->allFiles($upDir);
-            if(count($otherFiles) === 0) {
-                $this->filesystem->deleteDirectory($upDir);
-            }
+        $this->deleteIfEmpty($upDir);
 
-        }
 
     }
 
