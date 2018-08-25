@@ -3,6 +3,8 @@ namespace Aruberuto\Workflow\Generators\Commands;
 
 use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
 use Aruberuto\Workflow\Generators\ResourceCollectionGenerator;
+use Aruberuto\Workflow\Generators\ResourceGenerator;
+
 use Symfony\Component\Console\Input\InputOption;
 
 class GenerateResourceCommand extends AbstractGenerateCommand
