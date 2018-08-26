@@ -17,6 +17,18 @@ use $APPNAME$\Presenters\$NAME$Presenter;
 class $CLASS$ extends BaseRepository implements $CLASS$Interface
 {
     /**
+     * Specify the Seachable fields
+     * you can specify the default method to search on each
+     *
+     * @var array
+     */
+    protected $fieldSearchable = [
+        // 'user_id' => '=',        // Equal Method
+        // 'status',                // Equal Method
+        // 'title' => 'like',       // Like method
+        // 'categories.name' => '=' // Relation searchable field
+    ];
+    /**
      * Specify Model class name
      *
      * @return string
