@@ -6,11 +6,11 @@ use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class $CLASS$Criteria.
+ * Class $CLASS$.
  *
  * @package $NAMESPACE$
  */
-class $CLASS$Criteria implements CriteriaInterface
+class $CLASS$ implements CriteriaInterface
 {
     /**
      * Apply criteria in query repository
