@@ -3,6 +3,7 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Foundation\Http\FormRequest;
+use $APPNAME$\Validators\$MODEL_NAME$Validator;
 
 class $REQUEST$ extends FormRequest
 {
@@ -17,14 +18,30 @@ class $REQUEST$ extends FormRequest
     }
 
     /**
+     * Retrieve all data for validation purpose,
+     * It is really helpfull to add some parameters from
+     * url or other places that was not in the request itself
+     *
+     * @return array
+     */
+    public function validationData() {
+        return array_merge(
+            parent::validationData(),
+            [
+                //'user_id' => $this->user
+            ]
+        );
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
+    public function rules($MODEL_NAME$Validator $validator)
     {
         return [
-            //
+            $validator->getRules($MODEL_NAME$Validator::$VALIDATOR_RULE$)
         ];
     }
 }

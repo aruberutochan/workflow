@@ -59,4 +59,17 @@ class RequestGenerator extends Generator
 
     }
 
+            /**
+     * Get array replacements.
+     *
+     * @return array
+     */
+    public function getReplacements()
+    {
+        return array_merge(parent::getReplacements(), [
+            'validator_rule' => $this->rule ? $this->rule : 'RULE_CREATE',
+            'model_name' => $this->option('model-name') ? $this->option('model-name') : $this->name,
+        ]);
+    }
+
 }

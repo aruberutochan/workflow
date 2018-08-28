@@ -117,7 +117,8 @@ abstract class AbstractGenerateCommand extends Command
                 'The base namespace of the generated files',
                 config('workflow.rootNamespace', 'App'),
 
-            ],
+            ]
+
 
         ];
     }
