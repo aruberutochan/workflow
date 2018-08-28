@@ -69,7 +69,13 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $resourceCollectionArguments = $sameArguments;
 
             $updateRequestArguments['name'] = $this->argument('name') . 'Update';
+            $updateRequestArguments['--rule'] = 'RULE_UPDATE';
+            $updateRequestArguments['--model-name'] = $this->argument('name');
+
+
             $createRequestArguments['name'] = $this->argument('name') . 'Create';
+            $createRequestArguments['--model-name'] = $this->argument('name');
+
             $metadataMigrationArguments['--metadata'] = true;
             $resourceCollectionArguments['--collection'] = true;
 
