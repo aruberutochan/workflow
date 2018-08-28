@@ -81,7 +81,7 @@ class $CONTROLLER$ extends Controller
 
         $$SINGULAR$ = $this->service->create($request);
 
-        if(is_a($$SINGULAR$, ValidatorException)) {
+        if(is_a($$SINGULAR$, ValidatorException::class)) {
             $e = $$SINGULAR$;
             if ($request->wantsJson()) {
                 return response()->json([
