@@ -191,7 +191,7 @@ class $CONTROLLER$ extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->service->delete($id);
+        $deleted = $this->service->destroy($id);
 
         if (request()->wantsJson()) {
 
