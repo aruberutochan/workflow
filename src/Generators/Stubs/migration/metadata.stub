@@ -37,6 +37,6 @@ class $CLASS$ extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('$PLURAL$_meta');
+		Schema::dropIfExists('$PLURAL$_meta');
 	}
 }
