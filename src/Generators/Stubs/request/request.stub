@@ -40,8 +40,6 @@ class $REQUEST$ extends FormRequest
      */
     public function rules($MODEL_NAME$Validator $validator)
     {
-        return [
-            $validator->getRules($MODEL_NAME$Validator::$VALIDATOR_RULE$)
-        ];
+        return $validator->getRules($MODEL_NAME$Validator::$VALIDATOR_RULE$);
     }
 }
