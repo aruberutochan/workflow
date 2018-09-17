@@ -33,6 +33,6 @@ class $CLASS$ extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('$PLURAL$');
+		Schema::dropIfExists('$PLURAL$');
 	}
 }
