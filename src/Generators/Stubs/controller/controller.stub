@@ -84,11 +84,11 @@ class $CONTROLLER$ extends Controller
             if ($request->wantsJson()) {
                 return response()->json([
                     'error'   => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessage()
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         } else {
             $response = [
                 'message' => '$NAME$ created.',
@@ -170,11 +170,11 @@ class $CONTROLLER$ extends Controller
 
                 return response()->json([
                     'error'   => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessage()
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 
