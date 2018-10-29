@@ -2,13 +2,9 @@
 
 namespace $NAMESPACE$;
 
-use Illuminate\Http\Request;
 use Aruberuto\Workflow\Services\AbstractService;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use $APPNAME$\Http\Requests\$NAME$CreateRequest;
-use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
 use $APPNAME$\Repositories\$REPOSITORY$Interface;
-use $APPNAME$\Validators\$VALIDATOR$;
+
 
 /**
  * Class $SERVICE$.
@@ -38,62 +34,11 @@ class $SERVICE$ extends AbstractService
      * @param $NAME$Repository $repository
      * @param $NAME$Validator $validator
      */
-    public function __construct($NAME$RepositoryInterface $repository, $NAME$Validator $validator)
+    public function __construct($NAME$RepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
-    }
-
-    /**
-     * Get all $PLURAL$
-     *
-     * @return Collection
-     */
-    public function getAll()
-    {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-
-        return $this->repository->with($this->relations)->all();
 
     }
 
-    public function create($NAME$CreateRequest $request)
-    {
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            return $this->repository->create($request->all());
-
-        } catch (ValidatorException $e) {
-
-            return $e;
-        }
-    }
-
-    public function get($id)
-    {
-        return $this->repository->with($this->relations)->find($id);
-
-    }
-
-    public function update($NAME$UpdateRequest $request, $id)
-    {
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            return $this->repository->update($request->all(), $id);
-
-        } catch (ValidatorException $e) {
-
-            return $e;
-        }
-    }
-
-    public function destroy($id)
-    {
-        return $this->repository->delete($id);
-
-    }
+   
 }

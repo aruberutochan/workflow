@@ -4,10 +4,9 @@ namespace Aruberuto\Workflow\Services;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Contracts\RepositoryInterface;
+use Aruberuto\Repository\Criteria\RequestCriteria;
+use Aruberuto\Repository\Contracts\RepositoryInterface;
 use Exception;
-use Aruberuto\Workflow\Contracts\FormRequestInterface;
 abstract class AbstractService {
 
     /**
@@ -49,7 +48,6 @@ abstract class AbstractService {
 
     public function create($request)
     {
-        // try {
 
             $return = $this->repository->create($request->all()); 
             if($this->createRelations) {
@@ -57,10 +55,6 @@ abstract class AbstractService {
             }         
             return $return;
 
-        // } catch (Exception $e) {
-
-            return $e;
-        // }
     }
 
     public function skipCreateRelations($bool = true ) {
@@ -95,25 +89,17 @@ abstract class AbstractService {
     public function get($id)
     {
         return $this->repository->with($this->relations)->find($id);
-
     }
 
     public function update($request, $id)
     {
-        // try {
             
             $return = $this->repository->update($request->all(), $id);
-
             if($this->createRelations) {
                 $return = $this->updateOrCreateRelationships($return, $request);
             }
-
             return $return;
 
-        // } catch (Exception $e) {
-
-            return $e;
-        // }
     }
 
     public function updateOrCreateRelationships($model, $request) {

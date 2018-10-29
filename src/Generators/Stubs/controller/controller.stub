@@ -3,14 +3,13 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Http\Request;
-use Prettus\Validator\Exceptions\ValidatorException;
+use \Exception;
 use App\Http\Controllers\Controller;
 use $APPNAME$\Http\Requests\$NAME$CreateRequest;
 use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
 use $APPNAME$\Http\Resources\$NAME$Resource;
 use $APPNAME$\Http\Resources\$NAME$CollectionResource;
 use $APPNAME$\Services\$SERVICE$;
-use $APPNAME$\Validators\$VALIDATOR$;
 
 
 /**
@@ -29,7 +28,6 @@ class $CONTROLLER$ extends Controller
      * $CONTROLLER$ constructor.
      *
      * @param $NAME$Service $service
-     * @param $NAME$Validator $validator
      */
     public function __construct($NAME$Service $service)
     {
@@ -74,14 +72,14 @@ class $CONTROLLER$ extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \Exception
      */
     public function store($NAME$CreateRequest $request)
     {
 
         $$SINGULAR$ = $this->service->create($request);
 
-        if(is_a($$SINGULAR$, ValidatorException::class)) {
+        if(is_a($$SINGULAR$, Exception::class)) {
             $e = $$SINGULAR$;
             if ($request->wantsJson()) {
                 return response()->json([
@@ -148,7 +146,6 @@ class $CONTROLLER$ extends Controller
      *
      * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update($NAME$UpdateRequest $request, $id)
     {
@@ -167,7 +164,7 @@ class $CONTROLLER$ extends Controller
             }
 
             return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
+        } catch (Exception $e) {
 
             if ($request->wantsJson()) {
 
