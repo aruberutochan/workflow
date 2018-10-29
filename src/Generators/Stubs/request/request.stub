@@ -3,7 +3,7 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Foundation\Http\FormRequest;
-use $APPNAME$\Validators\$MODEL_NAME$Validator;
+
 
 class $REQUEST$ extends FormRequest
 {
@@ -14,7 +14,7 @@ class $REQUEST$ extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return !!$this->user();
     }
 
     /**
@@ -38,8 +38,11 @@ class $REQUEST$ extends FormRequest
      *
      * @return array
      */
-    public function rules($MODEL_NAME$Validator $validator)
+    public function rules()
     {
-        return $validator->getRules($MODEL_NAME$Validator::$VALIDATOR_RULE$);
+        return [
+            //'title' => 'required|unique:posts|max:255',
+            //'body' => 'required',
+        ];
     }
 }

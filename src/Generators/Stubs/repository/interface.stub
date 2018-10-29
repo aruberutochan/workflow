@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-use Prettus\Repository\Contracts\RepositoryInterface;
+use Aruberuto\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface $CLASS$Interface.
