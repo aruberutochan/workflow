@@ -19,11 +19,6 @@ class $SERVICE$ extends AbstractService
     protected $repository;
 
     /**
-     * @var $NAME$Validator
-     */
-    protected $validator;
-
-    /**
      * @var $NAME$ Relations Array
      */
     protected $relations = ['metas'];
