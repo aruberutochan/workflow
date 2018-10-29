@@ -2,8 +2,8 @@
 
 namespace $NAMESPACE$;
 
-use Prettus\Repository\Contracts\CriteriaInterface;
-use Prettus\Repository\Contracts\RepositoryInterface;
+use Aruberuto\Repository\Contracts\CriteriaInterface;
+use Aruberuto\Repository\Contracts\RepositoryInterface;
 
 /**
  * Class $CLASS$.
