@@ -119,6 +119,7 @@ abstract class Generator
             'service'        => $this->getServiceName(),
             'plural'         => $this->getPluralName(),
             'singular'       => $this->getSingularName(),
+            'table_name'     => $this->getTableName(),
             'validator'      => $this->getValidatorName(),
             'repository'     => $this->getRepositoryName(),
             'appname'        => $this->getRootNamespace(),
@@ -221,6 +222,17 @@ abstract class Generator
     public function getSingularName()
     {
         return str_singular(lcfirst(ucwords($this->getName())));
+    }
+
+
+    /**
+     * Gets singular name based on model
+     *
+     * @return string
+     */
+    public function getTableName()
+    {
+        return snake_case($this->getPluralName());
     }
 
 

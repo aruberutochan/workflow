@@ -15,58 +15,58 @@ class $CLASS$ extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('$PLURAL$', function(Blueprint $table) {
+		Schema::create('$TABLE_NAME$', function(Blueprint $table) {
 
 
-        $table->increments('id');
-
-        /*
-        |-------------------------------------------------------------------
-        | Basic entity fields
-        |-------------------------------------------------------------------
-        */
-        //  $table->string('name');
-        //  $table->text('body');
-
-        /*
-        |-------------------------------------------------------------------
-        | Belongs to example table posts
-        |-------------------------------------------------------------------
-        */
-        //  $table->integer('user_id')->unsigned();
-        //  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-        /*
-        |-------------------------------------------------------------------
-        | Many to Many example pivot table user_role
-        |-------------------------------------------------------------------
-        */
-        //  $table->increments('id');
-        //  $table->integer('user_id')->unsigned()->index();
-        //  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        //  $table->integer('role_id')->unsigned()->index();
-        //  $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-
-        /*
-        |-------------------------------------------------------------------
-        | Polymorphic OneToMany example table comments
-        |-------------------------------------------------------------------
-        */
-        //  $table->integer('commentable_id');
-        //  $table->string('commentable_type');
-
-        /*
-        |-------------------------------------------------------------------
-        | Polymorphic Many2Many example pivot table taggables
-        |-------------------------------------------------------------------
-        */
-        //  $table->integer("tag_id");
-        //  $table->integer("taggable_id");
-        //  $table->string("taggable_type");
-
+            $table->increments('id');
+            $table->timestamps();
 
             $FIELDS$
-            $table->timestamps();
+
+            /*
+            |-------------------------------------------------------------------
+            | Basic entity fields
+            |-------------------------------------------------------------------
+            */
+            //  $table->string('name');
+            //  $table->text('body');
+
+            /*
+            |-------------------------------------------------------------------
+            | Belongs to example table posts
+            |-------------------------------------------------------------------
+            */
+            //  $table->integer('user_id')->unsigned();
+            //  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            /*
+            |-------------------------------------------------------------------
+            | Many to Many example pivot table user_role
+            |-------------------------------------------------------------------
+            */
+            //  $table->increments('id');
+            //  $table->integer('user_id')->unsigned()->index();
+            //  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            //  $table->integer('role_id')->unsigned()->index();
+            //  $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+
+            /*
+            |-------------------------------------------------------------------
+            | Polymorphic OneToMany example table comments
+            |-------------------------------------------------------------------
+            */
+            //  $table->integer('commentable_id');
+            //  $table->string('commentable_type');
+
+            /*
+            |-------------------------------------------------------------------
+            | Polymorphic Many2Many example pivot table taggables
+            |-------------------------------------------------------------------
+            */
+            //  $table->integer("tag_id");
+            //  $table->integer("taggable_id");
+            //  $table->string("taggable_type");
+
 		});
 	}
 
@@ -77,6 +77,6 @@ class $CLASS$ extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('$PLURAL$');
+		Schema::dropIfExists('$TABLE_NAME$');
 	}
 }

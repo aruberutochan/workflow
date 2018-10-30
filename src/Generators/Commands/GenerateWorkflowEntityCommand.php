@@ -2,7 +2,7 @@
 namespace Aruberuto\Workflow\Generators\Commands;
 
 use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
-
+use Symfony\Component\Console\Input\InputOption;
 class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
 {
 
@@ -62,9 +62,10 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
         try {
 
             $sameArguments = $this->sameOptionsAndArguments();
-            
+            unset($sameArguments['--src']);
+
             $srcSameArguments = $sameArguments;
-            $srcSameArguments['--src'] = true;
+            $srcSameArguments['--src'] =  $this->option('src') === 'no' || $this->option('src') === 'false' ? false : true;
 
             $updateRequestArguments = $srcSameArguments;
             $createRequestArguments = $srcSameArguments;
@@ -109,7 +110,7 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $this->call('wf:generate:view', $sameArguments);
             $this->call('wf:generate:helper', $srcSameArguments);
             $this->call('wf:generate:route', $sameArguments);
-            
+
             $webRouteArguments = $sameArguments;
             $webRouteArguments['--web'] = true;
             $this->call('wf:generate:route', $webRouteArguments);

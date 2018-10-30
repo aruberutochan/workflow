@@ -121,7 +121,7 @@ abstract class AbstractGenerateCommand extends Command
             [
                 'src',
                 null,
-                InputOption::VALUE_NONE,
+                InputOption::VALUE_OPTIONAL,
                 'Add src folder to path.',
                 null
             ]
