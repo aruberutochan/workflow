@@ -1,0 +1,11 @@
+<?php
+
+use Illuminate\Http\Request;
+
+//:NewHelperFile:
+
+Route::group(['middleware' => 'web'], function () {
+
+    //:NewRoutesAgregator:
+    
+});
