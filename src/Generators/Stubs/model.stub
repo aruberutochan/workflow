@@ -27,4 +27,131 @@ class $CLASS$ extends Model {
      */
     protected $fillable = $FILLABLE$;
 
+    /*
+    |-------------------------------------------------------------------
+    | Relationships examples
+    |-------------------------------------------------------------------
+    */
+
+    //::::
+
+    /*
+    |-------------------------------------------------------------------
+    | One to Many relationship example
+    |
+    |   *  (User has many Posts)
+    |-------------------------------------------------------------------
+    |
+    */
+    /**
+     * Get the user owner.
+     */
+    //  public function user()
+    //  {
+    //      return $this->belongsTo(App\User::class);
+    //  }
+
+    /**
+     * Get the user owner.
+     */
+    //  public function posts()
+    //  {
+    //      return $this->hasMany(Post::class);
+    //  }
+
+
+    /*
+    |-------------------------------------------------------------------
+    | Many to Many relationship example
+    |
+    |   *  (A User has many Roles, A Role belongs to many Users)
+    |-------------------------------------------------------------------
+    |
+    */
+    /**
+     * The roles that belong to the user.
+     */
+    //  public function roles()
+    //  {
+    //      return $this->belongsToMany(Role::class);
+    //  }
+
+
+
+    /*
+    |-------------------------------------------------------------------
+    | Polymorphic relationship example
+    |
+    |   *  (A Comment belongs to a Entity,
+    |       but also could belongs to other entity type)
+    |-------------------------------------------------------------------
+    |
+    */
+    /**
+     * Get all of the owning commentable models. Defined in Comment Class
+     */
+    //  public function commentable()
+    //  {
+    //      return $this->morphTo();
+    //  }
+
+    /**
+     * Get Comments
+     */
+    //  public function comments()
+    //  {
+    //      return $this->morphMany(Comment::class, 'commentable');
+    //  }
+
+    /*
+    |-------------------------------------------------------------------
+    | Many2Many Polymorphic relationship example
+    |
+    |   *  (One Tag could belongs to many different entities)
+    |-------------------------------------------------------------------
+    |
+    */
+    /**
+     * Get all of the tags for the post.
+     */
+    //  public function tags()
+    //  {
+    //      return $this->morphToMany(Tag::class, 'taggable');
+    //  }
+
+    /**
+     * Get all of the posts that are assigned this tag.
+     */
+    //  public function posts()
+    //  {
+    //      return $this->morphedByMany(Post::class, 'taggable');
+    //  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

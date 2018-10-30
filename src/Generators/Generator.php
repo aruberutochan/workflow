@@ -138,7 +138,7 @@ abstract class Generator
     {
         $base_path = $this->hasOption('path') && $this->path ? base_path() .'/'. $this->normalizePath($this->path): base_path()  .'/'. config('workflow.appPath', 'app');
         // Log::debug($base_path);
-        $base_path =  $this->hasOption('src') && $this->src ? $base_path .'/src': $base_path;
+        $base_path =  $this->hasOption('path') && $this->path && $this->hasOption('src') && $this->src ? $base_path .'/src': $base_path;
         return $this->normalizePath($base_path);
     }
 
