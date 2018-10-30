@@ -306,6 +306,12 @@ abstract class Generator
             case ('criteria' === $class):
                 $path = config('workflow.criteriaPath', 'Criteria');
                 break;
+            case ('helper' === $class):
+                $path = config('workflow.helperPath', 'Helpers');
+                break;
+            case ('route' === $class):
+                $path = config('workflow.helperPath', 'routes');
+                break;
             case ('view' === $class):
                 $path = config('workflow.viewPath', 'resources\views');
                 break;
