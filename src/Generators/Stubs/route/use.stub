@@ -1,0 +1,2 @@
+use $APPNAME$\Http\Controllers\$NAME$Controller\Helpers\$NAME$Helper;
+//:NewHelperFile:

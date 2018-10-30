@@ -1,0 +1,11 @@
+<?php
+
+use Illuminate\Http\Request;
+
+//:NewHelperFile:
+
+Route::group(['middleware' => 'auth:api' , 'prefix' => 'api/v1'], function() {
+
+    //:NewRoutesAgregator:
+
+});

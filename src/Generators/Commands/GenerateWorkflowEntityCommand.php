@@ -104,6 +104,15 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
 
             // $this->call('wf:generate:validator', $sameArguments);
             $this->call('wf:generate:view', $sameArguments);
+            $this->call('wf:generate:helper', $sameArguments);
+            $this->call('wf:generate:route', $sameArguments);
+            
+            $webRouteArguments = $sameArguments;
+            $webRouteArguments['--web'] = true;
+            $this->call('wf:generate:route', $webRouteArguments);
+
+
+
 
 
 
