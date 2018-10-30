@@ -15,11 +15,11 @@ class $CLASS$ extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('$PLURAL$_meta', function(Blueprint $table) {
+		Schema::create('$TABLE_NAME$_meta', function(Blueprint $table) {
             $table->increments('id');
 
             $table->integer('$SINGULAR$_id')->unsigned()->index();
-            $table->foreign('$SINGULAR$_id')->references('id')->on('$PLURAL$')->onDelete('cascade');
+            $table->foreign('$SINGULAR$_id')->references('id')->on('$TABLE_NAME$')->onDelete('cascade');
 
             $table->string('type')->default('null');
 
@@ -37,6 +37,6 @@ class $CLASS$ extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('$PLURAL$_meta');
+		Schema::dropIfExists('$TABLE_NAME$_meta');
 	}
 }
