@@ -1,5 +1,5 @@
 <?php
-namespace $APPNAME$\database\seeds;
+// namespace $APPNAME$\database\seeds;
 use Illuminate\Database\Seeder;
 
 class $CLASS$ extends Seeder

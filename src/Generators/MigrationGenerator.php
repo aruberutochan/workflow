@@ -61,6 +61,7 @@ class MigrationGenerator extends Generator
     {
 
         $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path() ;
+        $base_path =  $this->hasOption('src') && $this->src ? $base_path .'/src': $base_path;
 
         return $this->normalizePath($base_path);
     }

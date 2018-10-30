@@ -62,11 +62,14 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
         try {
 
             $sameArguments = $this->sameOptionsAndArguments();
+            
+            $srcSameArguments = $sameArguments;
+            $srcSameArguments['--src'] = true;
 
-            $updateRequestArguments = $sameArguments;
-            $createRequestArguments = $sameArguments;
+            $updateRequestArguments = $srcSameArguments;
+            $createRequestArguments = $srcSameArguments;
             $metadataMigrationArguments = $sameArguments;
-            $resourceCollectionArguments = $sameArguments;
+            $resourceCollectionArguments = $srcSameArguments;
 
             $updateRequestArguments['name'] = $this->argument('name') . 'Update';
             $updateRequestArguments['--rule'] = 'RULE_UPDATE';
@@ -79,11 +82,11 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $metadataMigrationArguments['--metadata'] = true;
             $resourceCollectionArguments['--collection'] = true;
 
-            $this->call('wf:generate:controller', $sameArguments);
-            $this->call('wf:generate:repository', $sameArguments);
+            $this->call('wf:generate:controller', $srcSameArguments);
+            $this->call('wf:generate:repository', $srcSameArguments);
 
-            $this->call('wf:generate:criteria', $sameArguments);
-            $this->call('wf:generate:model', $sameArguments);
+            $this->call('wf:generate:criteria', $srcSameArguments);
+            $this->call('wf:generate:model', $srcSameArguments);
 
             $this->call('wf:generate:migration', $sameArguments);
             $this->call('wf:generate:migration', $metadataMigrationArguments);
@@ -94,17 +97,17 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $this->call('wf:generate:request', $updateRequestArguments);
             $this->call('wf:generate:request', $createRequestArguments);
 
-            $this->call('wf:generate:service', $sameArguments);
+            $this->call('wf:generate:service', $srcSameArguments);
 
-            // $this->call('wf:generate:presenter', $sameArguments);
-            // $this->call('wf:generate:transformer', $sameArguments);
+            // $this->call('wf:generate:presenter', $srcSameArguments);
+            // $this->call('wf:generate:transformer', $srcSameArguments);
 
-            $this->call('wf:generate:resource', $sameArguments);
+            $this->call('wf:generate:resource', $srcSameArguments);
             $this->call('wf:generate:resource', $resourceCollectionArguments);
 
-            // $this->call('wf:generate:validator', $sameArguments);
+            // $this->call('wf:generate:validator', $srcSameArguments);
             $this->call('wf:generate:view', $sameArguments);
-            $this->call('wf:generate:helper', $sameArguments);
+            $this->call('wf:generate:helper', $srcSameArguments);
             $this->call('wf:generate:route', $sameArguments);
             
             $webRouteArguments = $sameArguments;
@@ -119,7 +122,7 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             if($this->option('remove')) {
                 $this->info($this->type . ' remove successfully.');
             } else {
-                $this->call('wf:generate:provider', $sameArguments);
+                $this->call('wf:generate:provider', $srcSameArguments);
                 $this->info($this->type . ' created successfully.');
             }
 
