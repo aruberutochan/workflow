@@ -117,6 +117,13 @@ abstract class AbstractGenerateCommand extends Command
                 'The base namespace of the generated files',
                 config('workflow.rootNamespace', 'App'),
 
+            ],
+            [
+                'src',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Add src folder to path.',
+                null
             ]
 
 
