@@ -1,2 +1,2 @@
-use $APPNAME$\Http\Controllers\$NAME$Controller\Helpers\$NAME$Helper;
+use $APPNAME$\Helpers\$NAME$Helper;
 //:NewHelperFile:
