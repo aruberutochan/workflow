@@ -1,0 +1,28 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Aruberuto\Repository\Contracts\AncestorCriteriaInterface;
+use Aruberuto\Repository\Contracts\RepositoryInterface;
+
+/**
+ * Class $CLASS$.
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASS$ implements AncestorCriteriaInterface
+{
+    /**
+     * Apply ancestor in query repository
+     *
+     * @param string              $model
+     * @param RepositoryInterface $repository
+     *
+     * @return mixed
+     */
+    public function apply($model, RepositoryInterface $repository)
+    {
+        // $model = Auth::user()->posts();
+        return $model;
+    }
+}

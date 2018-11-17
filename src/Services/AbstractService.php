@@ -19,6 +19,12 @@ abstract class AbstractService {
      */
     protected $relations = [];
 
+    protected $storeAncestor = null;
+    protected $getterCriteria = [RequestCriteria::class];
+    protected $skipCriteria = false;
+    protected $skipAncestor = false;
+    protected $skipRelations = false;
+
     /**
      * @var Entity Relations Array
      */
@@ -42,18 +48,31 @@ abstract class AbstractService {
      */
     public function getAll()
     {
-        $this->repository->pushCriteria(app(RequestCriteria::class));
-        return $this->repository->with($this->relations)->all();
+        if(!$this->$skipCriteria) {
+            foreach($this->getterCriteria as $criteria) {
+                $this->repository = $this->repository->pushCriteria(app($criteria));
+            }
+        }
+        if(!$this->skipRelations) {
+            $this->repository = $this->repository->with($this->relations);
+        }
+
+        return $this->repository->all();
     }
 
     public function create($request)
     {
+        if($this->skipAncestor) {
+            $this->repository = $this->repository->skipAncestor();
+        } elseif($this->storeAncestor) {
+            $this->repository = $this->repository->setAncestor($this->storeAncestor);
+        }
 
-            $return = $this->repository->create($request->all()); 
-            if($this->createRelations) {
-                $return = $this->updateOrCreateRelationships($return, $request);
-            }         
-            return $return;
+        $return = $this->repository->create($request->all());
+        if($this->createRelations) {
+            $return = $this->updateOrCreateRelationships($return, $request);
+        }
+        return $return;
 
     }
 
@@ -72,8 +91,8 @@ abstract class AbstractService {
                         if(!is_array($entityAtributtes)) {
                             $toSave[] = $request->$relation;
                             break;
-                        } 
-                        $toSave[] = $entityAtributtes;                         
+                        }
+                        $toSave[] = $entityAtributtes;
                     }
                     $model->$relation()->createMany($toSave);
                 }
@@ -88,17 +107,24 @@ abstract class AbstractService {
 
     public function get($id)
     {
-        return $this->repository->with($this->relations)->find($id);
+        if(!$this->$skipCriteria) {
+            foreach($this->getterCriteria as $criteria) {
+                $this->repository = $this->repository->pushCriteria(app($criteria));
+            }
+        }
+        if(!$this->skipRelations) {
+            $this->repository = $this->repository->with($this->relations);
+        }
+        return $this->repository->find($id);
     }
 
     public function update($request, $id)
     {
-            
-            $return = $this->repository->update($request->all(), $id);
-            if($this->createRelations) {
-                $return = $this->updateOrCreateRelationships($return, $request);
-            }
-            return $return;
+        $return = $this->repository->update($request->all(), $id);
+        if($this->createRelations) {
+            $return = $this->updateOrCreateRelationships($return, $request);
+        }
+        return $return;
 
     }
 
@@ -123,9 +149,9 @@ abstract class AbstractService {
                             break;
                         }
                         if(isset($entityAtributtes[$primaryKey])) {
-                            $toUpdate[] = $entityAtributtes;  
+                            $toUpdate[] = $entityAtributtes;
                         } else {
-                            $toCreate[] = $entityAtributtes;  
+                            $toCreate[] = $entityAtributtes;
                         }
                     }
                     foreach($toUpdate as $attributes) {
@@ -137,8 +163,8 @@ abstract class AbstractService {
                             $rel->update($attributes);
                         } else {
                             throw new Exception('Wrong primary key for relation "' . $relation . '"');
-                        } 
-                        
+                        }
+
                     }
                     $model->$relation()->createMany($toCreate);
                 }
@@ -154,7 +180,7 @@ abstract class AbstractService {
     public function deleteRelationships($model) {
         foreach($this->relations as $relation) {
             $model->$relation()->delete();
-            
+
         }
         return $model;
     }

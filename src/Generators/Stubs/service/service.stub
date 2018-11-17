@@ -23,6 +23,21 @@ class $SERVICE$ extends AbstractService
      */
     protected $relations = ['metas'];
 
+
+    /**
+     * @var $NAME$ Criteria Array used in all get methods
+     */
+    protected $getterCriteria = [
+        $APPNAME$\Criteria\$NAME$AncestorCriteria::class,
+        RequestCriteria::class
+    ];
+
+    /**
+     * @var $NAME$ AncestorCriteria Array used store methods
+     */
+    protected $storeAncestor = [ $APPNAME$\Criteria\$NAME$AncestorCriteria::class ];
+
+
     /**
      * $SERVICE$Service constructor.
      *
@@ -35,5 +50,5 @@ class $SERVICE$ extends AbstractService
 
     }
 
-   
+
 }

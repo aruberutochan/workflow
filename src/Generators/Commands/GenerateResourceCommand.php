@@ -40,7 +40,7 @@ class GenerateResourceCommand extends AbstractGenerateCommand
         parent::__construct();
     }
 
-        /**
+    /**
      * Execute the command.
      *
      * @return void
