@@ -8,9 +8,15 @@ use $APPNAME$\Http\Controllers\$NAME$Controller;
 class $NAME$Helper {
 
     public static function  routes() {
-        
+
         Route::get('$SINGULAR$/all', $NAME$Controller::class . '@all');
         Route::resource('$SINGULAR$', $NAME$Controller::class);
+
+    }
+
+    public static function  apiRoutes() {
+
+        Route::apiResource('$SINGULAR$', $NAME$Controller::class);
 
     }
 }
