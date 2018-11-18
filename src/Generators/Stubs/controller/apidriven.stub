@@ -1,0 +1,56 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Illuminate\Http\Request;
+use \Exception;
+use Aruberuto\Repository\Http\Controllers\AbstractController;
+use $APPNAME$\Http\Requests\$NAME$CreateRequest;
+use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
+use $APPNAME$\Http\Resources\$NAME$Resource;
+use $APPNAME$\Http\Resources\$NAME$CollectionResource;
+use $APPNAME$\Services\$SERVICE$;
+use Aruberuto\Repository\Traits\ApiDrivenControllerTrait;
+use Aruberuto\Repository\Traits\AttachAndDetachControllerTrait;
+
+
+/**
+ * Class $CONTROLLER$.
+ *
+ * @package $NAMESPACE$
+ */
+class $CONTROLLER$ extends AbstractController
+{
+    use ApiDrivenControllerTrait, AttachAndDetachControllerTrait;
+
+    /**
+     * @var $NAME$Service
+     */
+    protected $service;
+
+    /**
+     * $CONTROLLER$ constructor.
+     *
+     * @param $NAME$Service $service
+     */
+    public function __construct($NAME$Service $service)
+    {
+        $this->service = $service;
+
+        $this->storeRequest = $NAME$CreateRequest::class;
+        $this->updateRequest = $NAME$UpdateRequest::class;
+
+        // protected $indexRequest = Request::class;
+        // protected $showRequest = Request::class;
+        // protected $destroyRequest = Request::class;
+
+        $this->collectionResource = $NAME$CollectionResource::class;
+        $this->singleResource = $NAME$Resource::class;
+
+        // protected $collectionResource = null;
+        // protected $singleResource = null;
+        // protected $deleteResource = null;
+    }
+
+
+}

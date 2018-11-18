@@ -46,7 +46,7 @@ class ApiRouteGenerator extends Generator
      *
      * @var string
      */
-    protected $routeStub = 'route/route';
+    protected $routeStub = 'route/apiroute';
 
         /**
      * Get stub name.
@@ -54,7 +54,7 @@ class ApiRouteGenerator extends Generator
      * @var string
      */
     protected $useStub = 'route/use';
-   
+
     /**
      * Get Class type.
      *

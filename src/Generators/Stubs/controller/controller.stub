@@ -4,7 +4,7 @@ namespace $NAMESPACE$;
 
 use Illuminate\Http\Request;
 use \Exception;
-use App\Http\Controllers\Controller;
+use Aruberuto\Repository\Http\Controllers\AbstractController;
 use $APPNAME$\Http\Requests\$NAME$CreateRequest;
 use $APPNAME$\Http\Requests\$NAME$UpdateRequest;
 use $APPNAME$\Http\Resources\$NAME$Resource;
@@ -17,7 +17,7 @@ use $APPNAME$\Services\$SERVICE$;
  *
  * @package $NAMESPACE$
  */
-class $CONTROLLER$ extends Controller
+class $CONTROLLER$ extends AbstractController
 {
     /**
      * @var $NAME$Service
