@@ -9,6 +9,7 @@ class $NAME$Helper {
 
     public static function  routes() {
 
+        self::attachAndDetachRoutes();
         Route::get('$SINGULAR$/all', $NAME$Controller::class . '@all');
         Route::resource('$SINGULAR$', $NAME$Controller::class);
 
@@ -16,7 +17,17 @@ class $NAME$Helper {
 
     public static function  apiRoutes() {
 
+        self::attachAndDetachRoutes();
         Route::apiResource('$SINGULAR$', $NAME$Controller::class);
+
+    }
+
+    public static function  attachAndDetachRoutes() {
+
+        Route::post('$SINGULAR$/attach/{$SINGULAR$}', $NAME$Controller::class . '@attach')->name('$SINGULAR$.attach');
+        Route::post('$SINGULAR$/detach/{$SINGULAR$}', $NAME$Controller::class . '@detach')->name('$SINGULAR$.detach');
+        Route::post('$SINGULAR$/detach-all/{$SINGULAR$}', $NAME$Controller::class . '@detachAll')->name('$SINGULAR$.detach-all');
+        Route::post('$SINGULAR$/sync/{$SINGULAR$}', $NAME$Controller::class . '@detachAll')->name('$SINGULAR$.sync');
 
     }
 }

@@ -22,7 +22,7 @@ class $CLASS$ implements AncestorCriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        // $model = Auth::user()->posts();
+        // $model = \Auth::user()->posts();
         return $model;
     }
 }

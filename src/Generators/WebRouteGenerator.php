@@ -11,13 +11,20 @@ use Prettus\Repository\Generators\RepositoryInterfaceGenerator;
  */
 class WebRouteGenerator extends ApiRouteGenerator
 {
-    
+
     /**
      * Get stub name.
      *
      * @var string
      */
     protected $stub = 'route/web';
+
+    /**
+     * Get stub name.
+     *
+     * @var string
+     */
+    protected $routeStub = 'route/route';
 
     /**
      * Get destination path for generated file.

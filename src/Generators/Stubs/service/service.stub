@@ -2,9 +2,9 @@
 
 namespace $NAMESPACE$;
 
-use Aruberuto\Workflow\Services\AbstractService;
+use Aruberuto\Repository\Services\AbstractService;
 use $APPNAME$\Repositories\$REPOSITORY$Interface;
-
+use Aruberuto\Repository\Traits\AttachAndDetachServiceTrait;
 
 /**
  * Class $SERVICE$.
@@ -13,6 +13,7 @@ use $APPNAME$\Repositories\$REPOSITORY$Interface;
  */
 class $SERVICE$ extends AbstractService
 {
+    use AttachAndDetachServiceTrait;
     /**
      * @var $NAME$Repository
      */
@@ -28,14 +29,14 @@ class $SERVICE$ extends AbstractService
      * @var $NAME$ Criteria Array used in all get methods
      */
     protected $getterCriteria = [
-        $APPNAME$\Criteria\$NAME$AncestorCriteria::class,
-        RequestCriteria::class
+        \Aruberuto\Repository\Criteria\RequestCriteria::class,
+        \$APPNAME$\Criteria\$NAME$Criteria::class,
     ];
 
     /**
      * @var $NAME$ AncestorCriteria Array used store methods
      */
-    protected $storeAncestor = [ $APPNAME$\Criteria\$NAME$AncestorCriteria::class ];
+    protected $storeAncestor = [ \$APPNAME$\Criteria\$NAME$AncestorCriteria::class ];
 
 
     /**
