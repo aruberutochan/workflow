@@ -1,0 +1,35 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Configuration of $SINGULAR$ entity
+    |--------------------------------------------------------------------------
+    |
+    | This configuration will manage all the custom setting for the entity
+    | the fields, how to display the information, the structure, the
+    | the validation etc.
+    |
+    */
+    'entity' => [
+        'namespace' => '\$NAMESPACE$',
+
+    ],
+    'form' => [
+        'class' => '$SINGULAR$-form inline',
+        'defaultFieldClass' => 'form-control',
+        'fields' => [
+            //:::form-fields:::
+        ]
+    ],
+    'display' => [
+        'class' => '$SINGULAR$-display',
+        'defaultFieldClass' => '$SINGULAR$-field',
+        'fields' => [
+            //:::display-fields:::
+        ]
+    ]
+
+
+];

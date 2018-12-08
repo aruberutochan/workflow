@@ -7,7 +7,7 @@ use Prettus\Repository\Generators\Stub;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 // use Illuminate\Support\Facades\Log;
-
+use Aruberuto\Configurable\Helpers\EloquentStructureHelper;
 abstract class Generator
 {
 
@@ -306,6 +306,9 @@ abstract class Generator
                 break;
             case ('seeder' === $class):
                 $path = config('workflow.seederPath', 'database\seeds');
+                break;
+            case ('config' === $class):
+                $path = config('workflow.ConfigPath', 'config\entities');
                 break;
             case ('factory' === $class):
                 $path = config('workflow.factoryPath', 'database\factories');
