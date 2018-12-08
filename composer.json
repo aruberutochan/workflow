@@ -1,5 +1,6 @@
 {
     "name": "aruberuto/workflow",
+    "description": "A package to generate model, controllers, helpers... in a laravel environment following the Aruberuto workflow",
     "type": "library",
     "license": "MIT",
     "authors": [{
