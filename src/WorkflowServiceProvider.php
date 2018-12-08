@@ -56,6 +56,7 @@ class WorkflowServiceProvider extends ServiceProvider
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateViewCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateHelperCommand');
         $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateRouteCommand');
+        $this->commands('Aruberuto\Workflow\Generators\Commands\GenerateConfigCommand');
 
 
 

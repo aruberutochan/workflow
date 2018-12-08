@@ -1,0 +1,10 @@
+
+            [
+                'name' => '$FIELD_NAME$',
+                'level' => $FIELD_LEVEL$,
+                'label' => '$FIELD_LABEL$',
+                'showLabel' => $SHOW_LABEL$,
+                'wrapper' => '$FIELD_WRAPPER$',
+                'attrs' => 'xs12',
+            ],
+            //:::display-fields:::

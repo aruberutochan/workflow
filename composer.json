@@ -23,7 +23,8 @@
         "prettus/l5-repository": "^2.6.25",
         "league/fractal": "^0.13.0@dev",
         "kodeine/laravel-meta": "dev-master",
-        "aruberuto/repository": "dev-master"
+        "aruberuto/repository": "dev-master",
+        "aruberuto/configurable": "dev-master"
     },
     "require-dev": {
     }
