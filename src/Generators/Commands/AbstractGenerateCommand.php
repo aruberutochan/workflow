@@ -50,7 +50,7 @@ abstract class AbstractGenerateCommand extends Command
 
         } catch (FileAlreadyExistsException $e) {
 
-            $this->error($this->type . ' already exists!');
+            $this->warn($this->type . ' already exists!');
 
             return false;
         } catch (FileNotFoundException $e) {

@@ -22,6 +22,12 @@ class $CLASS$ extends ServiceProvider
         //  __DIR__ . '/../../resources/lang' => resource_path('lang/$VIEWS_PACKAGE$'),
         ]);
 
+        $entities = [
+            //:::entityName:::
+        ];
+
+        $this->registerEntitiesConfig($entities);
+
         //:bootMethodProvider:
 
     }
@@ -38,5 +44,22 @@ class $CLASS$ extends ServiceProvider
 
         //:registerMethodProvider:
 
+    }
+
+
+    public function registerEntitiesConfig($entities) {
+        $publishPaths = [];
+        foreach($entities as $entity) {
+            if(file_exists( __DIR__.'/../../config/entities/' . $entity . '.php')) {
+                $publishPaths[ __DIR__.'/../../config/entities/' . $entity . '.php' ] = config_path('entities/' . $entity . '.php');
+            }
+        }
+        $this->publishes($publishPaths, 'config');
+
+        foreach($entities as $entity) {
+            if(file_exists( __DIR__.'/../../config/entities/' . $entity . '.php')) {
+                $this->mergeConfigFrom( __DIR__.'/../../config/entities/' . $entity . '.php', 'entities.' . $entity);
+            }
+        }
     }
 }

@@ -14,14 +14,19 @@ return [
     */
     'entity' => [
         'namespace' => '\$NAMESPACE$',
+        'class' => '\$ENTITY_CLASS$',
 
     ],
     'form' => [
         'class' => '$SINGULAR$-form inline',
         'defaultFieldClass' => 'form-control',
         'fields' => [
-            //:::form-fields:::
-        ]
+            'type' => 'group',
+            'attrs' => ['xs12' => true],
+            'fields' => [
+                //:::form-fields:::
+            ]
+        ],
     ],
     'display' => [
         'class' => '$SINGULAR$-display',

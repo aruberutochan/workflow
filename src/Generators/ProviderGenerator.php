@@ -56,6 +56,8 @@ class ProviderGenerator extends Generator
      */
     protected $registerStub = 'provider/register';
 
+    protected $entitiesConfigStub = 'provider/entities-config';
+
     /**
      * Get Class type.
      *
@@ -110,6 +112,7 @@ class ProviderGenerator extends Generator
             }
 
             $this->bootAndRegisterStub();
+            $this->entitiesConfigStub();
         }
 
 
@@ -122,6 +125,10 @@ class ProviderGenerator extends Generator
 
     }
 
+    public function entitiesConfigStub() {
+        \File::put($this->getPath(), str_replace('//:::entityName:::', rtrim($this->getEntitiesConfigStub()) , \File::get($this->getPath())));
+
+    }
     /**
      * Get stub template for generated file.
      *
@@ -136,6 +143,22 @@ class ProviderGenerator extends Generator
         }
 
         return (new Stub($path . '/Stubs/' .  $this->bootStub . '.stub', $this->getReplacements()))->render();
+    }
+
+    /**
+     * Get stub template for generated file.
+     *
+     * @return string
+     */
+    public function getEntitiesConfigStub()
+    {
+        $path = config('workflow.stubsOverridePath', __DIR__);
+
+        if(!file_exists($path . '/Stubs/' .  $this->entitiesConfigStub . '.stub')){
+            $path = __DIR__;
+        }
+
+        return (new Stub($path . '/Stubs/' .  $this->entitiesConfigStub . '.stub', $this->getReplacements()))->render();
     }
 
     /**

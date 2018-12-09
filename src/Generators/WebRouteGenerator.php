@@ -39,5 +39,19 @@ class WebRouteGenerator extends ApiRouteGenerator
         return $return;
     }
 
+        /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+
+        $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path() ;
+        $base_path =  $this->hasOption('path') && $this->path && $this->hasOption('src') && $this->src ? $base_path .'/src': $base_path;
+
+        return $this->normalizePath($base_path);
+    }
+
 
 }

@@ -5,6 +5,7 @@ use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Aruberuto\Workflow\Generators\AncestorCriteriaGenerator;
 use Aruberuto\Workflow\Generators\CriteriaGenerator;
+use Prettus\Repository\Generators\FileAlreadyExistsException;
 
 class GenerateCriteriaCommand extends AbstractGenerateCommand
 {
@@ -61,7 +62,7 @@ class GenerateCriteriaCommand extends AbstractGenerateCommand
 
         } catch (FileAlreadyExistsException $e) {
 
-            $this->error($this->type . ' already exists!');
+            $this->warn($this->type . ' already exists!');
 
             return false;
         } catch (FileNotFoundException $e) {
