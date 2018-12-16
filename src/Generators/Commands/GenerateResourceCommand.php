@@ -6,6 +6,7 @@ use Aruberuto\Workflow\Generators\ResourceCollectionGenerator;
 use Aruberuto\Workflow\Generators\ResourceGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class GenerateResourceCommand extends AbstractGenerateCommand
 {

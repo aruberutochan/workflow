@@ -5,6 +5,7 @@ use Aruberuto\Workflow\Generators\Commands\AbstractGenerateCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Aruberuto\Workflow\Generators\AncestorCriteriaGenerator;
 use Aruberuto\Workflow\Generators\CriteriaGenerator;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class GenerateCriteriaCommand extends AbstractGenerateCommand
 {

@@ -6,6 +6,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Aruberuto\Workflow\Generators\ControllerGenerator;
 use Aruberuto\Workflow\Generators\ApiDrivenControllerGenerator;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+
 class GenerateControllerCommand extends AbstractGenerateCommand
 {
 
