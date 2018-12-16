@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Aruberuto\Workflow\Generators\ControllerGenerator;
 use Aruberuto\Workflow\Generators\ApiDrivenControllerGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class GenerateControllerCommand extends AbstractGenerateCommand
 {

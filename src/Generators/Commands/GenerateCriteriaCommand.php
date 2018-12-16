@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Aruberuto\Workflow\Generators\AncestorCriteriaGenerator;
 use Aruberuto\Workflow\Generators\CriteriaGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class GenerateCriteriaCommand extends AbstractGenerateCommand
 {

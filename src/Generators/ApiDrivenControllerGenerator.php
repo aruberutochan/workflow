@@ -50,12 +50,12 @@ class ApiDrivenControllerGenerator extends Generator
         return 'controller';
     }
 
-    public function removeRun($path, $dirDelete = true) {
-        parent::removeRun($path);
-        // Two levels of delete directories
-        $upDir = dirname(dirname($path));
-        $this->deleteIfEmpty($upDir);
+    // public function removeRun($path, $dirDelete = true) {
+    //     parent::removeRun($path);
+    //     // Two levels of delete directories
+    //     $upDir = dirname(dirname($path));
+    //     $this->deleteIfEmpty($upDir);
 
-    }
+    // }
 
 }
