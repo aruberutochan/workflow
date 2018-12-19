@@ -74,7 +74,7 @@ class GenerateResourceCommand extends AbstractGenerateCommand
 
         } catch (FileAlreadyExistsException $e) {
 
-            $this->error($this->type . ' already exists!');
+            $this->warn($this->type . ' already exists!');
 
             return false;
         } catch (FileNotFoundException $e) {

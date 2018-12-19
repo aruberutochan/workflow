@@ -1,9 +1,9 @@
 
-            [
-                'name' => '$FIELD_NAME$',
-                'label' => '$FIELD_LABEL$',
-                'instructions' => '$FIELD_INSTRUCTIONS$',
-                'type' => 'text',
-                'attrs' => 'xs12',
-            ],
-            //:::form-fields:::
+                [
+                    'name' => '$FIELD_NAME$',
+                    'label' => '$FIELD_LABEL$',
+                    'instructions' => '$FIELD_INSTRUCTIONS$',
+                    'type' => 'text',
+                    'attrs' => ['xs12' => true],
+                ],
+                //:::form-fields:::

@@ -57,6 +57,33 @@ class ConfigGenerator extends Generator
         return 'config';
     }
 
+    /**
+     * Get destination path for generated file.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+
+        $return = $this->getBasePath() . '/' . $this->getConfigGeneratorClassPath($this->getClassType(), true) . '/'. $this->name .'.php';
+        // Log::debug($return);
+        return $return;
+    }
+
+    /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+
+        $base_path = $this->hasOption('path') ? base_path() .'/'. $this->normalizePath($this->path): base_path() ;
+        $base_path =  $this->hasOption('path') && $this->path && $this->hasOption('src') && $this->src ? $base_path .'/src': $base_path;
+
+        return $this->normalizePath($base_path);
+    }
+
     public function removeRun($path, $dirDelete = true) {
         parent::removeRun($path);
         // Two levels of delete directories
@@ -107,6 +134,13 @@ class ConfigGenerator extends Generator
 
         return (new Stub($path . '/Stubs/' .  $this->displayFieldStub . '.stub', $this->getFieldReplacements($field)))->render();
 
+    }
+
+    public function getReplacements() {
+        $parent = parent::getReplacements();
+        return array_merge($parent, [
+            'entity_class' => $this->hasOption('entity') ? $this->entity : '',
+        ]);
     }
 
     public function getFieldReplacements($field) {

@@ -5,6 +5,6 @@
                 'label' => '$FIELD_LABEL$',
                 'showLabel' => $SHOW_LABEL$,
                 'wrapper' => '$FIELD_WRAPPER$',
-                'attrs' => 'xs12',
+                'attrs' => ['xs12' => true],
             ],
             //:::display-fields:::

@@ -6,6 +6,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Aruberuto\Workflow\Generators\WebRouteGenerator;
 use Aruberuto\Workflow\Generators\ApiRouteGenerator;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+
 class GenerateRouteCommand extends AbstractGenerateCommand
 {
 
