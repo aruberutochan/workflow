@@ -15,8 +15,14 @@ class $CLASS$ extends ServiceProvider
     {
 
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+
         // $this->loadTranslationsFrom(   __DIR__ . '/../../resources/lang' , '$VIEWS_PACKAGE$');
+
+        $this->loadRoutesFrom( __DIR__ . '/../../routes/api.php');
+        $this->loadRoutesFrom( __DIR__ . '/../../routes/web.php');
+
         $this->loadViewsFrom(__DIR__.'/../../resources/views', '$VIEWS_PACKAGE$');
+
         $this->publishes([
             __DIR__.'/../../resources/views' => resource_path('views/$VIEWS_PACKAGE$'),
         //  __DIR__ . '/../../resources/lang' => resource_path('lang/$VIEWS_PACKAGE$'),
@@ -39,11 +45,7 @@ class $CLASS$ extends ServiceProvider
      */
     public function register()
     {
-        include __DIR__ . '/../../routes/api.php';
-        include __DIR__ . '/../../routes/web.php';
-
         //:registerMethodProvider:
-
     }
 
 
