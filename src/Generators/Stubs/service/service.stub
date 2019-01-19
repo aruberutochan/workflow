@@ -34,12 +34,6 @@ class $SERVICE$ extends AbstractService
     ];
 
     /**
-     * @var $NAME$ AncestorCriteria Array used store methods
-     */
-    protected $storeAncestor = [ \$APPNAME$\Criteria\$NAME$AncestorCriteria::class ];
-
-
-    /**
      * $SERVICE$Service constructor.
      *
      * @param $NAME$Repository $repository
@@ -48,6 +42,17 @@ class $SERVICE$ extends AbstractService
     public function __construct($NAME$RepositoryInterface $repository)
     {
         $this->repository = $repository;
+
+    }
+
+    public function applyStorePreset() {
+        // $this->request = $this->request->merge([
+        //     'user_id' => Auth::user()->id
+        // ]);
+        return $this;
+    }
+
+    public function applyAfterSaveActions($model) {
 
     }
 

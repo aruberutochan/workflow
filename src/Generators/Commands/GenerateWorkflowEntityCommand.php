@@ -71,8 +71,8 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $createRequestArguments = $srcSameArguments;
             $metadataMigrationArguments = $sameArguments;
             $resourceCollectionArguments = $srcSameArguments;
-            $ancestorCriteriaArguments = $srcSameArguments;
-            $ancestorCriteriaArguments['--ancestor'] = true;
+            // $ancestorCriteriaArguments = $srcSameArguments;
+            // $ancestorCriteriaArguments['--ancestor'] = true;
 
             $updateRequestArguments['name'] = $this->argument('name') . 'Update';
             $updateRequestArguments['--rule'] = 'RULE_UPDATE';
@@ -89,7 +89,7 @@ class GenerateWorkflowEntityCommand extends AbstractGenerateCommand
             $this->call('wf:generate:repository', $srcSameArguments);
 
             $this->call('wf:generate:criteria', $srcSameArguments);
-            $this->call('wf:generate:criteria', $ancestorCriteriaArguments);
+            // $this->call('wf:generate:criteria', $ancestorCriteriaArguments);
 
             $this->call('wf:generate:model', $srcSameArguments);
 

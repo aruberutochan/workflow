@@ -6,8 +6,6 @@ use Aruberuto\Repository\Eloquent\BaseRepository;
 use Aruberuto\Repository\Criteria\RequestCriteria;
 use $APPNAME$\Repositories\$CLASS$Interface;
 use $APPNAME$\Entities\$NAME$;
-use $APPNAME$\Validators\$NAME$Validator;
-use $APPNAME$\Presenters\$NAME$Presenter;
 
 /**
  * Class $CLASS$.
