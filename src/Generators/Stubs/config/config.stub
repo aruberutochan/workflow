@@ -20,11 +20,15 @@ return [
     'form' => [
         'class' => '$SINGULAR$-form inline',
         'defaultFieldClass' => 'form-control',
-        'fields' => [
-            'type' => 'group',
-            'attrs' => ['xs12' => true],
-            'fields' => [
-                //:::form-fields:::
+        'groups' => [
+            [
+                'title' => '',
+                'class' => 'form-control',
+                'type' => 'group',
+                'attrs' => ['xs12' => true],
+                'fields' => [
+                    //:::form-fields:::
+                ]
             ]
         ],
     ],
